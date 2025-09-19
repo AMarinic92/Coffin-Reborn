@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/config/default/startup_xc32.c</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/config/default/peripheral/tc/plib_tc0.c</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/Tinker/FirstProject_default/components/sercom1.yml</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/config/default/peripheral/port/plib_port.c</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/Tinker/FirstProject_default/components/tc0.yml</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/main.c</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/Tinker/FirstProject_default/components/cmsis.yml</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/Tinker/FirstProject_default/components/core.yml</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/config/default/pin_configurations.csv</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c</file>
+            <file>file:/C:/Users/andre/Documents/Embedded/src/config/default/interrupts.c</file>
+        </group>
+    </open-files>
+</project-private>
