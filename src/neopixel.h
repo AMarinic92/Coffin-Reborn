@@ -70,7 +70,7 @@ extern "C" {
         This library is configured for 8 LEDs. Each LED requires 24 SPI bytes
         for color data transmission (8 bytes each for G, R, B channels).
      */
-#define NUM_LEDS 8
+#define NUM_LEDS 144
 
     /* ************************************************************************** */
     /** Buffer Size
@@ -395,6 +395,177 @@ extern "C" {
         None.
      */
     void test_sequence(void);
+    
+        /**
+      @Function
+        uint32_t get_random_number(void)
+
+      @Summary
+        Get a 32-bit random number from the TRNG.
+
+      @Description
+        Reads a random value from the True Random Number Generator peripheral
+        using the Harmony-generated TRNG API.
+
+      @Precondition
+        TRNG must be enabled in MPLAB Harmony configuration.
+
+      @Returns
+        32-bit random number.
+     */
+    uint32_t get_random_number(void);
+
+    // *****************************************************************************
+    /**
+      @Function
+        void get_random_red_orange(uint8_t *red, uint8_t *green, uint8_t *blue)
+
+      @Summary
+        Generate a random red/orange color using TRNG.
+
+      @Description
+        Creates random colors in the red to orange spectrum:
+        - Red: 255
+        - Green: 0-150 (controls orange intensity)
+        - Blue: 0
+
+      @Precondition
+        TRNG must be enabled in MPLAB Harmony configuration.
+
+      @Parameters
+        @param red Pointer to store red value (will be 255)
+        @param green Pointer to store green value (0-150)
+        @param blue Pointer to store blue value (will be 0)
+
+      @Returns
+        None.
+
+      @Example
+        @code
+        uint8_t r, g, b;
+        get_random_red_orange(&r, &g, &b);
+        set_led_color(0, r, g, b);
+        @endcode
+     */
+    void get_random_red_orange(uint8_t *red, uint8_t *green, uint8_t *blue);
+
+// *****************************************************************************
+/**
+  @Function
+    void test_sequence_random(void)
+
+  @Summary
+    Sequentially light up LEDs with random red/orange colors.
+
+  @Description
+    Lights up each LED one by one with a randomly generated red/orange color
+    using the TRNG. Creates a warm, fire-like sequential effect.
+
+  @Precondition
+    neopixel_init() must have been called.
+    TRNG must be enabled in MPLAB Harmony configuration.
+
+  @Returns
+    None.
+
+  @Example
+    @code
+    neopixel_init();
+    test_sequence_random();
+    @endcode
+ */
+void test_sequence_random(void);
+
+// *****************************************************************************
+/**
+  @Function
+    void test_random_sparkle(uint8_t num_sparkles, uint32_t delay_ms)
+
+  @Summary
+    Create random red/orange sparkles across the LED strip.
+
+  @Description
+    Randomly selects LEDs and sets them to random red/orange colors,
+    creating a twinkling effect. Previous LEDs remain lit.
+
+  @Precondition
+    neopixel_init() must have been called.
+    TRNG must be enabled in MPLAB Harmony configuration.
+
+  @Parameters
+    @param num_sparkles Number of random LEDs to light per call
+    @param delay_ms Delay in milliseconds between sparkles (approximate)
+
+  @Returns
+    None.
+
+  @Example
+    @code
+    // Sparkle 5 random LEDs at a time
+    for(int i = 0; i < 100; i++) {
+        test_random_sparkle(5, 100);
+    }
+    @endcode
+ */
+void test_random_sparkle(uint8_t num_sparkles, uint32_t delay_ms);
+
+// *****************************************************************************
+/**
+  @Function
+    void test_random_fill(void)
+
+  @Summary
+    Fill all LEDs with random red/orange colors simultaneously.
+
+  @Description
+    Sets all 144 LEDs to random red/orange colors and displays them
+    all at once, creating a random fire-like pattern.
+
+  @Precondition
+    neopixel_init() must have been called.
+    TRNG must be enabled in MPLAB Harmony configuration.
+
+  @Returns
+    None.
+
+  @Example
+    @code
+    test_random_fill();
+    @endcode
+ */
+void test_random_fill(void);
+
+// *****************************************************************************
+/**
+  @Function
+    void test_random_wave(uint8_t wave_position)
+
+  @Summary
+    Create a traveling wave of random red/orange colors.
+
+  @Description
+    Shifts all LED colors down one position and adds a new random
+    red/orange color at the beginning, creating a flowing wave effect.
+
+  @Precondition
+    neopixel_init() must have been called.
+    TRNG must be enabled in MPLAB Harmony configuration.
+
+  @Parameters
+    @param wave_position Position counter (not currently used, for future expansion)
+
+  @Returns
+    None.
+
+  @Example
+    @code
+    while(1) {
+        test_random_wave(0);
+        delay_ms(50);
+    }
+    @endcode
+ */
+void test_random_wave(uint8_t wave_position);
 
     // *****************************************************************************
     // *****************************************************************************
@@ -433,7 +604,46 @@ extern "C" {
         Volatile qualifier ensures flag changes are visible across ISR boundary.
      */
     extern volatile bool dma_complete;
+// *****************************************************************************
+/**
+  @Function
+    void test_red_orange_gradient_shift(uint8_t shift_offset)
 
+  @Summary
+    Display a smooth red-to-orange gradient that shifts along the strip.
+
+  @Description
+    Creates a repeating gradient pattern from deep red through orange to bright
+    orange across all 144 LEDs. The pattern shifts/rotates based on shift_offset,
+    creating a smooth flowing animation effect. The gradient repeats optimally
+    to fill the entire strip.
+
+  @Precondition
+    neopixel_init() must have been called.
+
+  @Parameters
+    @param shift_offset Shift position (0-255), controls the rotation of the gradient
+
+  @Returns
+    None.
+
+  @Remarks
+    - Gradient repeats every 36 LEDs (4 complete cycles across 144 LEDs)
+    - Color progression: Deep Red -> Red -> Red-Orange -> Orange -> Bright Orange
+    - Call repeatedly with incrementing shift_offset for smooth animation
+
+  @Example
+    @code
+    // Smooth shifting gradient animation
+    uint8_t offset = 0;
+    while(1) {
+        test_red_orange_gradient_shift(offset);
+        offset++;
+        delay_ms(50);
+    }
+    @endcode
+ */
+void test_red_orange_gradient_shift(uint8_t shift_offset);
 /* Provide C++ Compatibility */
 #ifdef __cplusplus
 }

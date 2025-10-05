@@ -378,15 +378,16 @@ void test_rainbow(void) {
     Refer to the neopixel.h interface header for function usage details.
  */
 void test_flame(uint8_t count) {
-    uint8_t count_base = count % NUM_LEDS;
-    set_led_color(count_base, 255, 142, 0);
-    set_led_color((count_base+1) % NUM_LEDS, 255, 127, 0);
-    set_led_color((count_base+2) % NUM_LEDS, 255, 82, 0);
-    set_led_color((count_base+3) % NUM_LEDS, 255, 67, 0);
-    set_led_color((count_base+4) % NUM_LEDS, 255, 52, 0);
-    set_led_color((count_base+5) % NUM_LEDS, 255, 37, 0);
-    set_led_color((count_base+6) % NUM_LEDS, 255, 22, 0);
-    set_led_color((count_base+7) % NUM_LEDS, 255, 0, 0);
+    for(int i = 0; i < NUM_LEDS; i+= 8){
+        set_led_color(i, 255, 142, 0);
+        set_led_color((1+i) , 255, 127, 0);
+        set_led_color((2+i), 255, 82, 0);
+        set_led_color((3+i), 255, 67, 0);
+        set_led_color((4+i), 255, 52, 0);
+        set_led_color((5+i), 255, 37, 0);
+        set_led_color((6+i), 255, 22, 0);
+        set_led_color((7+i), 255, 0, 0);
+    }
     neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
 }
 
@@ -431,13 +432,225 @@ void test_sequence(void) {
     neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
     
     for(int i = 0; i < NUM_LEDS; i++) {
-        set_led_color(i, 0, 0, 255); // Blue
+        set_led_color(i, i, 0, 175); // Blue
         neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
         // Add delay here if you have a delay function
         for(volatile int d = 0; d < 1000000; d++); // Simple delay
     }
 }
 
+/** 
+  @Function
+    uint32_t get_random_number(void)
+
+  @Summary
+    Get a 32-bit random number from the TRNG using direct register access.
+ */
+uint32_t get_random_number(void) {
+    // Enable TRNG if not already enabled
+    if((TRNG_REGS->TRNG_CTRLA & TRNG_CTRLA_ENABLE_Msk) == 0) {
+        // Enable TRNG peripheral clock
+        MCLK_REGS->MCLK_APBCMASK |= MCLK_APBCMASK_TRNG_Msk;
+        
+        // Enable TRNG
+        TRNG_REGS->TRNG_CTRLA = TRNG_CTRLA_ENABLE_Msk;
+        
+        // Wait for first random number to be ready
+        while((TRNG_REGS->TRNG_INTFLAG & TRNG_INTFLAG_DATARDY_Msk) == 0);
+    }
+    
+    // Wait for data ready
+    while((TRNG_REGS->TRNG_INTFLAG & TRNG_INTFLAG_DATARDY_Msk) == 0);
+    
+    // Read and return random data
+    return TRNG_REGS->TRNG_DATA;
+}
+
+// *****************************************************************************
+/** 
+  @Function
+    void get_random_red_orange(uint8_t *red, uint8_t *green, uint8_t *blue)
+
+  @Summary
+    Generate a random red/orange color using TRNG.
+ */
+void get_random_red_orange(uint8_t *red, uint8_t *green, uint8_t *blue) {
+    uint32_t random = get_random_number();
+    
+    // Red is always maximum for red/orange spectrum
+    *red = 255;
+    
+    // Green varies from 0 to 150 to create red->orange gradient
+    // 0 = pure red, 150 = orange
+    *green = (uint8_t)(random % 151);
+    
+    // Blue is always 0 for red/orange spectrum
+    *blue = 0;
+}
+
+// *****************************************************************************
+/** 
+  @Function
+    void test_sequence_random(void)
+
+  @Summary
+    Sequentially light up LEDs with random red/orange colors.
+ */
+void test_sequence_random(void) {
+    uint8_t r, g, b;
+    
+    // Clear all LEDs first
+    clear_all_leds();
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+    
+    // Light up LEDs one by one with random red/orange colors
+    for(int i = 0; i < NUM_LEDS; i++) {
+        // Get random red/orange color
+        get_random_red_orange(&r, &g, &b);
+        
+        // Set LED color
+        set_led_color(i, r, g, b);
+        
+        // Send data to strip
+        neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+        
+        // Delay (adjust as needed - approximately 50ms)
+        for(volatile int d = 0; d < 500000; d++);
+    }
+}
+
+// *****************************************************************************
+/** 
+  @Function
+    void test_random_sparkle(uint8_t num_sparkles, uint32_t delay_ms)
+
+  @Summary
+    Create random red/orange sparkles across the LED strip.
+ */
+void test_random_sparkle(uint8_t num_sparkles, uint32_t delay_ms) {
+    uint8_t r, g, b;
+    
+    for(uint8_t i = 0; i < num_sparkles; i++) {
+        // Get random LED index
+        uint32_t random = get_random_number();
+        uint8_t led_index = (uint8_t)(random % NUM_LEDS);
+        
+        // Get random red/orange color
+        get_random_red_orange(&r, &g, &b);
+        
+        // Set LED color
+        set_led_color(led_index, r, g, b);
+    }
+    
+    // Send all changes at once
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+    
+    // Simple delay approximation (not precise milliseconds)
+    for(volatile uint32_t d = 0; d < (delay_ms * 10000); d++);
+}
+
+// *****************************************************************************
+/** 
+  @Function
+    void test_random_fill(void)
+
+  @Summary
+    Fill all LEDs with random red/orange colors simultaneously.
+ */
+void test_random_fill(void) {
+    uint8_t r, g, b;
+    
+    // Set each LED to a random red/orange color
+    for(int i = 0; i < NUM_LEDS; i++) {
+        get_random_red_orange(&r, &g, &b);
+        set_led_color(i, r, g, b);
+    }
+    
+    // Send all at once
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+}
+
+// *****************************************************************************
+/** 
+  @Function
+    void test_random_wave(uint8_t wave_position)
+
+  @Summary
+    Create a traveling wave of random red/orange colors.
+ */
+void test_random_wave(uint8_t wave_position) {
+    uint8_t r, g, b;
+    
+    // Shift existing colors down one position
+    for(int i = NUM_LEDS - 1; i > 0; i--) {
+        // Copy color data from previous LED (24 bytes per LED)
+        uint8_t *src = &neopixel_buffer[(i-1) * 24];
+        uint8_t *dst = &neopixel_buffer[i * 24];
+        for(int j = 0; j < 24; j++) {
+            dst[j] = src[j];
+        }
+    }
+    
+    // Set first LED to new random color
+    get_random_red_orange(&r, &g, &b);
+    set_led_color(0, r, g, b);
+    
+    // Send data
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+}
+
+// *****************************************************************************
+/** 
+  @Function
+    void test_red_orange_gradient_shift(uint8_t shift_offset)
+
+  @Summary
+    Display a smooth red-to-orange gradient that shifts along the strip.
+ */
+void test_red_orange_gradient_shift(uint8_t shift_offset) {
+    // Gradient repeats every 24 LEDs (144/24 = 6 complete cycles)
+    // Using dramatic color differences with blue accents for high contrast
+    const uint8_t GRADIENT_LENGTH = 24;
+    
+    // Create strong color steps with distinct zones
+    for(int i = 0; i < NUM_LEDS; i++) {
+        // Calculate position in gradient with shift
+        uint8_t pos = (i + shift_offset) % GRADIENT_LENGTH;
+        
+        uint8_t red, green, blue;
+        
+        // Create 6 highly contrasted color zones within each 24-LED cycle
+        // Each zone is 4 LEDs wide for strong visual separation
+        if(pos < 4) {
+            // Zone 1: Deep Red
+            red = 255; green = 0; blue = 0;
+        }
+        else if(pos < 8) {
+            // Zone 2: Purple-Red (adds blue for contrast)
+            red = 255; green = 0; blue = 80;
+        }
+        else if(pos < 12) {
+            // Zone 3: Orange-Red
+            red = 255; green = 100; blue = 0;
+        }
+        else if(pos < 16) {
+            // Zone 4: Red-Orange with blue tint
+            red = 255; green = 80; blue = 40;
+        }
+        else if(pos < 20) {
+            // Zone 5: Bright Orange
+            red = 255; green = 180; blue = 0;
+        }
+        else {
+            // Zone 6: Pink-Orange (blue accent for variety)
+            red = 255; green = 100; blue = 120;
+        }
+        
+        set_led_color(i, red, green, blue);
+    }
+    
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+}
 /* *****************************************************************************
  End of File
  */
