@@ -183,5 +183,8 @@ void CLOCK_Initialize (void)
     /* Configure the APBA Bridge Clocks */
     MCLK_REGS->MCLK_APBAMASK = 0xe7ffU;
 
+    /* Configure the APBC Bridge Clocks */
+    MCLK_REGS->MCLK_APBCMASK = 0x2400U;
+
 
 }

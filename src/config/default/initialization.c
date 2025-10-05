@@ -146,6 +146,8 @@ void SYS_Initialize ( void* data )
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
+	TRNG_Initialize();
+
     TC0_TimerInitialize();
 
 
