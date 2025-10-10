@@ -35,7 +35,7 @@ data:
       - children:
         - attributes:
             id: sercom1
-            value: '120'
+            value: '143'
           type: Dynamic
         type: Values
       type: Hex
@@ -48,7 +48,7 @@ data:
             id: max
           children:
           - type: Value
-            value: '2412'
+            value: '2050'
           type: Integer
         type: Attributes
       type: Integer
@@ -255,7 +255,7 @@ data:
       - children:
         - attributes:
             id: sercom1
-            value: '60797'
+            value: '61509'
           type: Dynamic
         type: Values
       type: Integer
@@ -372,4 +372,22 @@ data:
           type: User
         type: Values
       type: Boolean
+    SPI_CLOCK_POLARITY:
+      attributes:
+        id: SPI_CLOCK_POLARITY
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
   userData: {}

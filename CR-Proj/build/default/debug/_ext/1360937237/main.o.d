@@ -114,6 +114,7 @@ build/default/debug/_ext/1360937237/main.o: ../src/main.c \
  ../src/config/default/peripheral/systick/plib_systick.h \
  ../src/config/default/peripheral/dmac/plib_dmac.h \
  ../src/config/default/peripheral/cmcc/plib_cmcc.h \
+ ../src/config/default/peripheral/trng/plib_trng.h \
  ../src/config/default/peripheral/tc/plib_tc0.h \
  ../src/config/default/peripheral/tc/plib_tc_common.h ../src/neopixel.h \
  ../src/dsun_sensor.h
@@ -349,6 +350,8 @@ build/default/debug/_ext/1360937237/main.o: ../src/main.c \
 ../src/config/default/peripheral/dmac/plib_dmac.h:
 
 ../src/config/default/peripheral/cmcc/plib_cmcc.h:
+
+../src/config/default/peripheral/trng/plib_trng.h:
 
 ../src/config/default/peripheral/tc/plib_tc0.h:
 

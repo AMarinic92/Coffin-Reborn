@@ -168,6 +168,12 @@ static void debug_buffer(void) {
     Refer to the neopixel.h interface header for function usage details.
  */
 void neopixel_init(void) {
+    // Initialize leading padding bytes to 0x00 (LOW signal)
+    // These will be transmitted first but ignored by the LEDs
+    for(int i = 0; i < NEOPIXEL_LEADING_ZEROS; i++) {
+        neopixel_buffer[i] = 0x00;
+    }
+    
     // Register DMA callback
     DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, DMA_0_Callback, 0);
 }
@@ -186,11 +192,8 @@ void neopixel_init(void) {
 void set_led_color(uint8_t led_index, uint8_t red, uint8_t green, uint8_t blue) {
     if(led_index >= NUM_LEDS) return; // Safety check
     
-    uint8_t *led_buffer = &neopixel_buffer[led_index * 24]; // 24 SPI bytes per LED
-    
-    // At 8 MHz: Each SPI bit = 0.125탎
-    // '0' bit: 0xE0 (11100000) = ~0.375탎 HIGH, ~0.625탎 LOW
-    // '1' bit: 0xF8 (11111000) = ~0.625탎 HIGH, ~0.375탎 LOW
+    // Calculate buffer position: skip leading zeros, then 24 bytes per LED
+    uint8_t *led_buffer = &neopixel_buffer[NEOPIXEL_LEADING_ZEROS + (led_index * 24)];
     
     // SK6812 order is G-R-B, each color needs 8 SPI bytes
     // Green first (8 bytes)
@@ -236,18 +239,37 @@ void clear_all_leds(void) {
     Refer to the neopixel.h interface header for function usage details.
  */
 void neopixel_send_data(uint8_t *buffer, uint16_t length) {
+    // Temporarily disable SPI and take manual control of the pin
+    SERCOM1_REGS->SPIM.SERCOM_CTRLA &= ~SERCOM_SPIM_CTRLA_ENABLE_Msk;
+    while((SERCOM1_REGS->SPIM.SERCOM_SYNCBUSY) != 0U);
+    
+    // Configure PA16 as GPIO output temporarily
+    PORT_REGS->GROUP[0].PORT_PINCFG[16] &= ~PORT_PINCFG_PMUXEN_Msk;  // Disable peripheral mux
+    PORT_REGS->GROUP[0].PORT_DIRSET = (1UL << 16);  // Set as output
+    PORT_REGS->GROUP[0].PORT_OUTCLR = (1UL << 16);  // Force LOW
+    
+    // Hold LOW for reset pulse (300탎)
+    for(volatile uint32_t i = 0; i < 30000; i++);
+    
+    // Now set HIGH briefly before re-enabling SPI
+    PORT_REGS->GROUP[0].PORT_OUTSET = (1UL << 16);  // Force HIGH
+    for(volatile uint32_t i = 0; i < 100; i++);
+    
+    // Re-configure as SPI peripheral
+    PORT_REGS->GROUP[0].PORT_PINCFG[16] |= PORT_PINCFG_PMUXEN_Msk;  // Re-enable peripheral mux
+    
+    // Re-enable SPI
+    SERCOM1_REGS->SPIM.SERCOM_CTRLA |= SERCOM_SPIM_CTRLA_ENABLE_Msk;
+    while((SERCOM1_REGS->SPIM.SERCOM_SYNCBUSY) != 0U);
+    
+    // Start DMA transfer
     dma_complete = false;
-    
-    // Configure and start DMA transfer
     DMAC_ChannelTransfer(DMAC_CHANNEL_0, 
-                        buffer,                    // Source
-                        (const void*)&SERCOM1_REGS->SPIM.SERCOM_DATA,  // Destination
-                        length);                   // Length
-    
-    // Wait for transfer complete
+                        buffer,
+                        (const void*)&SERCOM1_REGS->SPIM.SERCOM_DATA,
+                        length);
     while(!dma_complete);
     
-    // Send reset pulse (keep line low for >80탎)
     delay_microseconds(100);
 }
 
@@ -403,15 +425,23 @@ void test_flame(uint8_t count) {
     Refer to the neopixel.h interface header for function usage details.
  */
 void test_green_to_purple(uint8_t count) {
-    uint8_t count_base = count % NUM_LEDS;
-    set_led_color(count_base, 0, 255, 0);           // Light green
-    set_led_color((count_base+1) % NUM_LEDS, 0, 195, 0);     // Medium-light green
-    set_led_color((count_base+2) % NUM_LEDS, 0, 125, 0);     // Medium green
-    set_led_color((count_base+3) % NUM_LEDS, 0, 25, 0);      // Dark green
-    set_led_color((count_base+4) % NUM_LEDS, 25, 0, 25);     // Dark purple
-    set_led_color((count_base+5) % NUM_LEDS, 125, 0, 125);   // Medium purple
-    set_led_color((count_base+6) % NUM_LEDS, 195, 0, 195);   // Medium-light purple
-    set_led_color((count_base+7) % NUM_LEDS, 255, 0, 255);   // Light purple
+    count = count;
+    for(int i = 0; i < NUM_LEDS; i++){
+        if(i > NUM_LEDS/2){
+            set_led_color(i,0,i,0);
+        } else{
+           set_led_color(i,255,0,255);
+        }
+    }
+//    uint8_t count_base = count % NUM_LEDS;
+//    set_led_color(count_base, 0, 255, 0);           // Light green
+//    set_led_color((count_base+1) % NUM_LEDS, 0, 195, 0);     // Medium-light green
+//    set_led_color((count_base+2) % NUM_LEDS, 0, 125, 0);     // Medium green
+//    set_led_color((count_base+3) % NUM_LEDS, 0, 25, 0);      // Dark green
+//    set_led_color((count_base+4) % NUM_LEDS, 25, 0, 25);     // Dark purple
+//    set_led_color((count_base+5) % NUM_LEDS, 125, 0, 125);   // Medium purple
+//    set_led_color((count_base+6) % NUM_LEDS, 195, 0, 195);   // Medium-light purple
+//    set_led_color((count_base+7) % NUM_LEDS, 255, 0, 255);   // Light purple
     neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
 }
 
@@ -651,6 +681,154 @@ void test_red_orange_gradient_shift(uint8_t shift_offset) {
     
     neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
 }
-/* *****************************************************************************
- End of File
+
+
+// *****************************************************************************
+/** 
+  @Function
+    void gradient_green_white_purple(uint32_t duration, uint32_t step)
+
+  @Summary
+    Display a moving circular gradient pattern: green -> white -> green -> white -> purple -> purple
+
+  @Description
+    Creates a smooth gradient that cycles through green, white, and purple colors.
+    The pattern moves along the LED strip in a circular fashion.
+
+  @Parameters
+    @param duration Total time this pattern should run (in milliseconds)
+    @param step Current position in the animation (updated every 50ms typically)
+
+  @Returns
+    None.
+
+  @Remarks
+    Call this function repeatedly, incrementing step each time interval.
+    The gradient pattern is designed to repeat smoothly across the strip.
+    
+  @Example
+    @code
+    // In your main loop with SysTick at 1ms intervals:
+    static uint32_t last_update = 0;
+    static uint32_t gradient_step = 0;
+    
+    if ((g_milliseconds - last_update) >= 50) {
+        last_update = g_milliseconds;
+        gradient_green_white_purple(10000, gradient_step);
+        gradient_step++;
+    }
+    @endcode
  */
+void gradient_green_white_purple(uint32_t duration, uint32_t step) {
+    // Gradient pattern repeats every 18 LEDs:
+    // Positions 0-5:   Green to White (6 LEDs)
+    // Positions 6-11:  White to Green (6 LEDs)  
+    // Positions 12-14: White to Purple (3 LEDs)
+    // Positions 15-17: Purple to Purple (3 LEDs - solid purple)
+    const uint8_t GRADIENT_LENGTH = 18;
+    
+    // Calculate offset based on step (circular motion)
+    uint8_t offset = step % GRADIENT_LENGTH;
+    
+    for(int i = 0; i < NUM_LEDS; i++) {
+        // Calculate position in gradient with circular wrapping
+        uint8_t pos = (i + offset) % GRADIENT_LENGTH;
+        
+        uint8_t red, green, blue;
+        
+        if(pos < 6) {
+            // Green to White (0-5)
+            // Green: (0, 255, 0) -> White: (255, 255, 255)
+            uint8_t progress = (pos * 255) / 5;  // 0 to 255
+            red = progress;
+            green = 255;
+            blue = progress;
+        }
+        else if(pos < 12) {
+            // White to Green (6-11)
+            // White: (255, 255, 255) -> Green: (0, 255, 0)
+            uint8_t progress = ((pos - 6) * 255) / 5;  // 0 to 255
+            red = 255 - progress;
+            green = 255;
+            blue = 255 - progress;
+        }
+        else if(pos < 15) {
+            // White to Purple (12-14)
+            // White: (255, 255, 255) -> Purple: (128, 0, 128)
+            uint8_t progress = ((pos - 12) * 255) / 2;  // 0 to 255
+            red = 255 - ((255 - 128) * progress) / 255;   // 255 -> 128
+            green = 255 - progress;                        // 255 -> 0
+            blue = 255 - ((255 - 128) * progress) / 255;   // 255 -> 128
+        }
+        else {
+            // Solid Purple (15-17)
+            red = 128;
+            green = 0;
+            blue = 128;
+        }
+        
+        set_led_color(i, red, green, blue);
+    }
+    
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+    
+    // Duration parameter is available for timing control in calling function
+    (void)duration; // Mark as intentionally unused in this function
+}
+
+
+// *****************************************************************************
+// Alternative version with more vibrant colors and better contrast
+// *****************************************************************************
+
+/** 
+  @Function
+    void gradient_green_white_purple_vibrant(uint32_t duration, uint32_t step)
+
+  @Summary
+    Vibrant version with stronger color contrast and brightness.
+ */
+void gradient_green_white_purple_vibrant(uint32_t duration, uint32_t step) {
+    const uint8_t GRADIENT_LENGTH = 18;
+    uint8_t offset = step % GRADIENT_LENGTH;
+    
+    for(int i = 0; i < NUM_LEDS; i++) {
+        uint8_t pos = (i + offset) % GRADIENT_LENGTH;
+        uint8_t red, green, blue;
+        
+        if(pos < 6) {
+            // Bright Green to White (0-5)
+            uint8_t progress = (pos * 255) / 5;
+            red = progress;
+            green = 255;
+            blue = progress;
+        }
+        else if(pos < 12) {
+            // White to Bright Green (6-11)
+            uint8_t progress = ((pos - 6) * 255) / 5;
+            red = 255 - progress;
+            green = 255;
+            blue = 255 - progress;
+        }
+        else if(pos < 15) {
+            // White to Vivid Purple (12-14)
+            // Using brighter purple (200, 0, 200) instead of (128, 0, 128)
+            uint8_t progress = ((pos - 12) * 255) / 2;
+            red = 255 - ((255 - 200) * progress) / 255;
+            green = 255 - progress;
+            blue = 255 - ((255 - 200) * progress) / 255;
+        }
+        else {
+            // Vivid Purple (15-17)
+            red = 200;
+            green = 0;
+            blue = 200;
+        }
+        
+        set_led_color(i, red, green, blue);
+    }
+    
+    neopixel_send_data(neopixel_buffer, sizeof(neopixel_buffer));
+    (void)duration;
+}
+

@@ -75,7 +75,7 @@ extern "C" {
 #define DEVICE_SERIES        "SAME51"
 
 /* CPU clock frequency */
-#define CPU_CLOCK_FREQUENCY 101968750U
+#define CPU_CLOCK_FREQUENCY 120000000U
 
 // *****************************************************************************
 // *****************************************************************************

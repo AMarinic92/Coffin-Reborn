@@ -65,6 +65,15 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for GPIO_PA14 pin ***/
+#define GPIO_PA14_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 14U))
+#define GPIO_PA14_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 14U))
+#define GPIO_PA14_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 14U))
+#define GPIO_PA14_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 14U))
+#define GPIO_PA14_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 14U))
+#define GPIO_PA14_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 14U)) & 0x01U)
+#define GPIO_PA14_PIN                  PORT_PIN_PA14
+
 /*** Macros for NeoPixelSPI pin ***/
 #define NeoPixelSPI_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 16U)) & 0x01U)
 #define NeoPixelSPI_PIN                  PORT_PIN_PA16

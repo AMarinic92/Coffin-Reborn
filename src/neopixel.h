@@ -57,8 +57,8 @@ extern "C" {
         ZERO_LED = 0xE0 (11100000) = ~0.375?s HIGH, ~0.625?s LOW
         ONE_LED = 0xF8 (11111000) = ~0.625?s HIGH, ~0.375?s LOW
      */
-#define ZERO_LED 0xE0
-#define ONE_LED 0xF8
+#define ZERO_LED 0xE0  // Keep original
+#define ONE_LED 0xFE   // 11111110 - even longer HIGH pulse
 
     /* ************************************************************************** */
     /** Number of LEDs in Strip
@@ -82,7 +82,12 @@ extern "C" {
         Buffer size calculation: 24 bytes per LED × 8 LEDs = 192 bytes total.
         This accounts for the SPI encoding where each color bit becomes one SPI byte.
      */
-#define NEOPIXEL_BUFFER_SIZE (24 * NUM_LEDS)
+// Number of padding bytes before actual LED data
+// These absorb any SPI startup corruption
+#define NEOPIXEL_LEADING_ZEROS 0  // 24 bytes = 1 LED worth of padding
+
+// Total buffer size including padding
+#define NEOPIXEL_BUFFER_SIZE ((24 * NUM_LEDS) + NEOPIXEL_LEADING_ZEROS)
 
     // *****************************************************************************
     // *****************************************************************************
@@ -604,6 +609,10 @@ void test_random_wave(uint8_t wave_position);
         Volatile qualifier ensures flag changes are visible across ISR boundary.
      */
     extern volatile bool dma_complete;
+    
+    void test_red_orange_gradient_shift(uint8_t shift_offset);
+    void gradient_green_white_purple(uint32_t duration, uint32_t step);
+    void gradient_green_white_purple_vibrant(uint32_t duration, uint32_t step);
 // *****************************************************************************
 /**
   @Function
@@ -643,7 +652,7 @@ void test_random_wave(uint8_t wave_position);
     }
     @endcode
  */
-void test_red_orange_gradient_shift(uint8_t shift_offset);
+
 /* Provide C++ Compatibility */
 #ifdef __cplusplus
 }

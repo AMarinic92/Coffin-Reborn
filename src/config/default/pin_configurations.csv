@@ -25,7 +25,7 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 28,PB15,,Available,,,,,,NORMAL
 29,PA12,,Available,,,,,,NORMAL
 30,PA13,,Available,,,,,,NORMAL
-31,PA14,,Available,,,,,,NORMAL
+31,PA14,GPIO_PA14,GPIO,Digital,Out,Low,,,STRONG
 32,PA15,,Available,,,,,,NORMAL
 35,PA16,NeoPixelSPI,SERCOM1_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
 36,PA17,,Available,,,,,,NORMAL

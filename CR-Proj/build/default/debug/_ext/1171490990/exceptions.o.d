@@ -115,6 +115,7 @@ build/default/debug/_ext/1171490990/exceptions.o: \
  ../src/config/default/peripheral/systick/plib_systick.h \
  ../src/config/default/peripheral/dmac/plib_dmac.h \
  ../src/config/default/peripheral/cmcc/plib_cmcc.h \
+ ../src/config/default/peripheral/trng/plib_trng.h \
  ../src/config/default/peripheral/tc/plib_tc0.h \
  ../src/config/default/peripheral/tc/plib_tc_common.h
 
@@ -351,6 +352,8 @@ build/default/debug/_ext/1171490990/exceptions.o: \
 ../src/config/default/peripheral/dmac/plib_dmac.h:
 
 ../src/config/default/peripheral/cmcc/plib_cmcc.h:
+
+../src/config/default/peripheral/trng/plib_trng.h:
 
 ../src/config/default/peripheral/tc/plib_tc0.h:
 
