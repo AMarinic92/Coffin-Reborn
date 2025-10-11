@@ -36,7 +36,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\libc_syscalls.c
   hash: 88bb2e34c939601b5b7ad076556e3ee0fcedf388436b8cddb6d6fd3e9d07472f
 - file: ..\src\config\default\peripheral\clock\plib_clock.c
-  hash: 2da1d2931baf2c6aff5d4723ce020b8a2b29f03c39dd12bb66f7fa98b9078909
+  hash: ac236826156078c07620258df3913aa32fb9e9ccb963317c48a57b8d088c5a69
 - file: ..\src\config\default\peripheral\clock\plib_clock.h
   hash: 59322a99314cb17c6b595d51d18769582e61189140188aa053acfdc671487f21
 - file: ..\src\config\default\peripheral\cmcc\plib_cmcc.c
@@ -64,7 +64,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\port\plib_port.h
   hash: c332778bb46a3b7541120d670530e6d1a023bbc8df4be87ce3debf86a8c9a94b
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.c
-  hash: 5d12d8f02bd9e514057ec567a3d42e00ecf84e7e8ef8efb5db2e7c43a4839e73
+  hash: cb28d881d8d0f519a12182d690a49739e3e07c73295566035fe4f4117a26bfd0
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.h
   hash: 27dba3e4bd95c522ba463d1d2b5030e81bd490055a73ae6d11fb41494d432f82
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom_spi_master_common.h

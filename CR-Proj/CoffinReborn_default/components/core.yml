@@ -432,7 +432,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '30000000'
+            value: '48000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -1264,7 +1264,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '30000000'
+            value: '48000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -1480,7 +1480,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '30000000'
+            value: '48000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -1621,7 +1621,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '7'
+            value: '6'
           type: User
         type: Values
       type: KeyValueSet
@@ -1667,7 +1667,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '4'
+            value: '1'
           type: Dynamic
         type: Values
       type: Integer
@@ -1677,7 +1677,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '4'
+            value: '0'
           type: User
         type: Values
       type: Integer
@@ -2522,6 +2522,37 @@ data:
           type: User
         type: Values
       type: KeyValueSet
+    GCLK_ID_32_GENSEL:
+      attributes:
+        id: GCLK_ID_32_GENSEL
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
+    GCLK_ID_32_FREQ:
+      attributes:
+        id: GCLK_ID_32_FREQ
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+    GCLK_ID_32_CHEN:
+      attributes:
+        id: GCLK_ID_32_CHEN
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
   userData:
     children:
     - attributes:

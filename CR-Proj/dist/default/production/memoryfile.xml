@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/debug/CR-Proj.debug.elf">
+  <executable name="dist/default/production/CR-Proj.production.elf">
     <memory name="program">
       <units>bytes</units>
       <length>1048576</length>
-      <used>3842</used>
-      <free>1044734</free>
+      <used>3824</used>
+      <free>1044752</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
