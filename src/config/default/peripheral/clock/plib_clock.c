@@ -88,6 +88,41 @@ static void FDPLL0_Initialize(void)
     }
 }
 
+static void FDPLL1_Initialize(void)
+{
+    GCLK_REGS->GCLK_PCHCTRL[2] = GCLK_PCHCTRL_GEN(0x2U)  | GCLK_PCHCTRL_CHEN_Msk;
+    while ((GCLK_REGS->GCLK_PCHCTRL[1] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
+    {
+        /* Wait for synchronization */
+    }
+
+    /****************** DPLL1 Initialization  *********************************/
+
+    /* Configure DPLL    */
+    OSCCTRL_REGS->DPLL[1].OSCCTRL_DPLLCTRLB = OSCCTRL_DPLLCTRLB_FILTER(0U) | OSCCTRL_DPLLCTRLB_LTIME(0x0U)| OSCCTRL_DPLLCTRLB_REFCLK(0U) ;
+
+
+    OSCCTRL_REGS->DPLL[1].OSCCTRL_DPLLRATIO = OSCCTRL_DPLLRATIO_LDRFRAC(7U) | OSCCTRL_DPLLRATIO_LDR(50U);
+
+    while((OSCCTRL_REGS->DPLL[1].OSCCTRL_DPLLSYNCBUSY & OSCCTRL_DPLLSYNCBUSY_DPLLRATIO_Msk) == OSCCTRL_DPLLSYNCBUSY_DPLLRATIO_Msk)
+    {
+        /* Waiting for the synchronization */
+    }
+
+    /* Enable DPLL */
+    OSCCTRL_REGS->DPLL[1].OSCCTRL_DPLLCTRLA = OSCCTRL_DPLLCTRLA_ENABLE_Msk   ;
+
+    while((OSCCTRL_REGS->DPLL[1].OSCCTRL_DPLLSYNCBUSY & OSCCTRL_DPLLSYNCBUSY_ENABLE_Msk) == OSCCTRL_DPLLSYNCBUSY_ENABLE_Msk )
+    {
+        /* Waiting for the DPLL enable synchronization */
+    }
+
+    while((OSCCTRL_REGS->DPLL[1].OSCCTRL_DPLLSTATUS & (OSCCTRL_DPLLSTATUS_LOCK_Msk | OSCCTRL_DPLLSTATUS_CLKRDY_Msk)) !=
+                (OSCCTRL_DPLLSTATUS_LOCK_Msk | OSCCTRL_DPLLSTATUS_CLKRDY_Msk))
+    {
+        /* Waiting for the Ready state */
+    }
+}
 
 static void DFLL_Initialize(void)
 {
@@ -134,7 +169,7 @@ static void GCLK2_Initialize(void)
 
 static void GCLK3_Initialize(void)
 {
-    GCLK_REGS->GCLK_GENCTRL[3] = GCLK_GENCTRL_DIV(0U) | GCLK_GENCTRL_SRC(6U) | GCLK_GENCTRL_GENEN_Msk;
+    GCLK_REGS->GCLK_GENCTRL[3] = GCLK_GENCTRL_DIV(0U) | GCLK_GENCTRL_SRC(8U) | GCLK_GENCTRL_GENEN_Msk;
 
     while((GCLK_REGS->GCLK_SYNCBUSY & GCLK_SYNCBUSY_GENCTRL_GCLK3) == GCLK_SYNCBUSY_GENCTRL_GCLK3)
     {
@@ -155,10 +190,11 @@ void CLOCK_Initialize (void)
 
     DFLL_Initialize();
     GCLK2_Initialize();
-    GCLK3_Initialize();
     FDPLL0_Initialize();
+    FDPLL1_Initialize();
     GCLK0_Initialize();
     GCLK1_Initialize();
+    GCLK3_Initialize();
 
     /* MISRAC 2012 deviation block end */
 

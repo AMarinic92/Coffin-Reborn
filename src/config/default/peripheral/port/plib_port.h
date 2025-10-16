@@ -65,14 +65,32 @@
 // *****************************************************************************
 // *****************************************************************************
 
-/*** Macros for GPIO_PA14 pin ***/
-#define GPIO_PA14_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 14U))
-#define GPIO_PA14_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 14U))
-#define GPIO_PA14_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 14U))
-#define GPIO_PA14_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 14U))
-#define GPIO_PA14_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 14U))
-#define GPIO_PA14_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 14U)) & 0x01U)
-#define GPIO_PA14_PIN                  PORT_PIN_PA14
+/*** Macros for PRelayIN pin ***/
+#define PRelayIN_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 6U))
+#define PRelayIN_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 6U))
+#define PRelayIN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 6U))
+#define PRelayIN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 6U))
+#define PRelayIN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 6U))
+#define PRelayIN_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 6U)) & 0x01U)
+#define PRelayIN_PIN                  PORT_PIN_PB06
+
+/*** Macros for PRelayOUT pin ***/
+#define PRelayOUT_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 7U))
+#define PRelayOUT_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 7U))
+#define PRelayOUT_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 7U))
+#define PRelayOUT_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 7U))
+#define PRelayOUT_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 7U))
+#define PRelayOUT_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 7U)) & 0x01U)
+#define PRelayOUT_PIN                  PORT_PIN_PB07
+
+/*** Macros for onboard_LED pin ***/
+#define onboard_LED_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 14U))
+#define onboard_LED_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 14U))
+#define onboard_LED_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 14U))
+#define onboard_LED_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 14U))
+#define onboard_LED_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 14U))
+#define onboard_LED_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 14U)) & 0x01U)
+#define onboard_LED_PIN                  PORT_PIN_PA14
 
 /*** Macros for NeoPixelSPI pin ***/
 #define NeoPixelSPI_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 16U)) & 0x01U)

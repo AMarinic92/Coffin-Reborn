@@ -5,8 +5,8 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 4,PA03,,Available,,,,,,NORMAL
 5,PB04,,Available,,,,,,NORMAL
 6,PB05,,Available,,,,,,NORMAL
-9,PB06,,Available,,,,,,NORMAL
-10,PB07,,Available,,,,,,NORMAL
+9,PB06,PRelayIN,GPIO,Digital,Out,Low,,,NORMAL
+10,PB07,PRelayOUT,GPIO,Digital,Out,Low,,,NORMAL
 11,PB08,,Available,,,,,,NORMAL
 12,PB09,,Available,,,,,,NORMAL
 13,PA04,,Available,,,,,,NORMAL
@@ -25,7 +25,7 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 28,PB15,,Available,,,,,,NORMAL
 29,PA12,,Available,,,,,,NORMAL
 30,PA13,,Available,,,,,,NORMAL
-31,PA14,GPIO_PA14,GPIO,Digital,Out,Low,,,STRONG
+31,PA14,onboard_LED,GPIO,Digital,Out,Low,,,STRONG
 32,PA15,,Available,,,,,,NORMAL
 35,PA16,NeoPixelSPI,SERCOM1_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
 36,PA17,,Available,,,,,,NORMAL
