@@ -43,24 +43,162 @@ uint32_t millis(void) {
 uint32_t seconds(void) {
     return (millis()) / (1000);
 }
+void test_tcc_output(void) {
+    // Manually set TCC compare value and start it
+    TCC0_REGS->TCC_CC[0] = 75;  // 50% duty cycle (half of 150)
+    TCC0_PWMStart();
+    
+    // Let it run for a few seconds so you can measure with scope/meter
+    SYSTICK_DelayMs(5000);
+    
+    TCC0_PWMStop();
+}
+
+void test_tcc_running(void) {
+    neopixel_init();
+    
+    // Set a fixed duty cycle
+    TCC0_PWM24bitCounterSet(75);  // 50% duty cycle
+    TCC0_PWMStart();
+    
+    // Blink status LED to show we're running
+    for(int i = 0; i < 20; i++) {
+        PORT_PinToggle(PORT_PIN_PA14);  // Your status LED
+        SYSTICK_DelayMs(250);
+    }
+    
+    TCC0_PWMStop();
+}
+
+void test_pa08_blink(void) {
+    // Configure PA08 as regular GPIO output (override TCC)
+    PORT_PinOutputEnable(PORT_PIN_PA08);
+    
+    for(int i = 0; i < 10; i++) {
+        PORT_PinSet(PORT_PIN_PA08);
+        SYSTICK_DelayMs(500);
+        PORT_PinClear(PORT_PIN_PA08);
+        SYSTICK_DelayMs(500);
+    }
+}
+
+void test_dma_completion(void) {
+    
+    // Fill buffer with test data
+    for(int i = 0; i < 100; i++) {
+        neopixel_tcc_buffer[i] = 50;
+    }
+    
+    // Try DMA transfer
+    neopixel_dma_complete = false;
+    
+    DMAC_ChannelTransfer(
+        DMAC_CHANNEL_0,
+        neopixel_tcc_buffer,
+        (const void*)&TCC0_REGS->TCC_CC[0],
+        100
+    );
+    
+    TCC0_PWMStart();
+    
+    // Wait with timeout
+    uint32_t timeout = 0;
+    while(!neopixel_dma_complete && timeout < 1000000) {
+        timeout++;
+    }
+    
+    TCC0_PWMStop();
+    // Blink result
+    if(neopixel_dma_complete) {
+        // SUCCESS - fast blink
+        for(int i = 0; i < 10; i++) {
+            PORT_PinToggle(PORT_PIN_PA14);
+            SYSTICK_DelayMs(100);
+        }
+    } else {
+        // FAILED - slow blink
+        for(int i = 0; i < 10; i++) {
+            PORT_PinToggle(PORT_PIN_PA14);
+            SYSTICK_DelayMs(500);
+        }
+       
+    }
+    
+    
+}
+
+void test_tcc_detailed(void) {
+    
+    // Read TCC period
+    uint32_t period = TCC0_REGS->TCC_PER;  // Should be 149
+    
+    // Set compare to 75 (50% of 150)
+    TCC0_PWM24bitCounterSet(75);  // 50% duty cycle
+    
+    // Start TCC
+    TCC0_PWMStart();
+    
+    // Wait and check if TCC is counting
+    SYSTICK_DelayMs(100);
+    volatile uint32_t count1 = TCC0_PWM24bitCounterGet();
+    
+    SYSTICK_DelayMs(101);
+    volatile uint32_t count2 = TCC0_PWM24bitCounterGet();
+    
+    TCC0_PWMStop();
+    
+    // Blink to indicate results
+    if(period == 149 && count2 != count1) {
+        // SUCCESS - TCC is running!
+        // Fast blink
+        for(int i = 0; i < 20; i++) {
+            PORT_PinToggle(PORT_PIN_PA14);
+            SYSTICK_DelayMs(100);
+        }
+    } else {
+        // FAIL - TCC not counting
+        // Slow blink
+        for(int i = 0; i < 10; i++) {
+            PORT_PinToggle(PORT_PIN_PA14);
+            SYSTICK_DelayMs(1000);
+        }
+    }
+}
+
+void test_neopixel_pattern(void) {
+    
+    while(1) {
+        // All red
+        for(int i = 0; i < 144; i++) {
+            set_led_color_tcc(i, 255, 0, 0);
+        }
+        neopixel_send_tcc();
+        SYSTICK_DelayMs(1000);
+        
+        // All off
+        for(int i = 0; i < 144; i++) {
+            set_led_color_tcc(i, 0, 0, 0);
+        }
+        neopixel_send_tcc();
+        SYSTICK_DelayMs(1000);
+        
+        // Blink status LED to show we're looping
+        PORT_PinToggle(PORT_PIN_PA14);
+    }
+}
+
 
 int main(void) {
     SYS_Initialize(NULL);
-    
     SYSTICK_TimerStart();
-    PORT_Initialize();
-    
     neopixel_init();
-    dsun_sensor_init();
+    //test_pa08_blink();
+//    test_tcc_running();
+//    test_tcc_detailed();
+//    test_dma_completion();
+    test_neopixel_pattern();
     
-    clear_all_leds();
-
-    while (true) {
+    while(1) {
         SYS_Tasks();
-        test_all_color(255,255,255);
-//        test_moving_rainbow(0);
-        SYSTICK_DelayMs(100);
     }
-    
-    return (EXIT_FAILURE);
 }

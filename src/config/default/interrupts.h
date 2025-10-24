@@ -65,8 +65,6 @@ void UsageFault_Handler (void);
 void DebugMonitor_Handler (void);
 void SysTick_Handler (void);
 void DMAC_0_InterruptHandler (void);
-void SERCOM1_SPI_InterruptHandler (void);
-void TC0_TimerInterruptHandler (void);
 
 
 

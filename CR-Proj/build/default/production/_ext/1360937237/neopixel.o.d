@@ -105,8 +105,8 @@ build/default/production/_ext/1360937237/neopixel.o: ../src/neopixel.c \
  ../src/config/default/device_cache.h ../src/config/default/device.h \
  ../src/config/default/toolchain_specifics.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h \
- ../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h \
- ../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h \
+ ../src/config/default/peripheral/tcc/plib_tcc0.h \
+ ../src/config/default/peripheral/tcc/plib_tcc_common.h \
  ../src/config/default/peripheral/evsys/plib_evsys.h \
  ../src/config/default/peripheral/port/plib_port.h \
  ../src/config/default/peripheral/clock/plib_clock.h \
@@ -114,9 +114,7 @@ build/default/production/_ext/1360937237/neopixel.o: ../src/neopixel.c \
  ../src/config/default/peripheral/systick/plib_systick.h \
  ../src/config/default/peripheral/dmac/plib_dmac.h \
  ../src/config/default/peripheral/cmcc/plib_cmcc.h \
- ../src/config/default/peripheral/trng/plib_trng.h \
- ../src/config/default/peripheral/tc/plib_tc0.h \
- ../src/config/default/peripheral/tc/plib_tc_common.h
+ ../src/config/default/peripheral/trng/plib_trng.h
 
 ../src/neopixel.h:
 
@@ -334,9 +332,9 @@ build/default/production/_ext/1360937237/neopixel.o: ../src/neopixel.c \
 
 ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h:
 
-../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h:
+../src/config/default/peripheral/tcc/plib_tcc0.h:
 
-../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h:
+../src/config/default/peripheral/tcc/plib_tcc_common.h:
 
 ../src/config/default/peripheral/evsys/plib_evsys.h:
 
@@ -353,7 +351,3 @@ build/default/production/_ext/1360937237/neopixel.o: ../src/neopixel.c \
 ../src/config/default/peripheral/cmcc/plib_cmcc.h:
 
 ../src/config/default/peripheral/trng/plib_trng.h:
-
-../src/config/default/peripheral/tc/plib_tc0.h:
-
-../src/config/default/peripheral/tc/plib_tc_common.h:

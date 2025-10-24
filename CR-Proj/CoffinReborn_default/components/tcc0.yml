@@ -1,0 +1,405 @@
+configVersion: 1.0.0
+componentName: tcc0
+coreVersion: 5.8.2
+device: ATSAME51J20A
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: tcc0
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.23.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: tcc0
+          x: '170'
+          y: '176'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    INTR_PWM_FAULT:
+      attributes:
+        id: INTR_PWM_FAULT
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_OTHER_IRQn
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_CALLBACK_API:
+      attributes:
+        id: PWM_CALLBACK_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWMCallbackRegister
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_GET_PERIOD_API:
+      attributes:
+        id: PWM_GET_PERIOD_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWM24bitPeriodGet
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_OUTPUT_DISABLE_API:
+      attributes:
+        id: PWM_OUTPUT_DISABLE_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWMPatternSet
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_OUTPUT_ENABLE_API:
+      attributes:
+        id: PWM_OUTPUT_ENABLE_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWMPatternSet
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_PATTERN_MASK:
+      attributes:
+        id: PWM_PATTERN_MASK
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: '119'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PWM_PH_MASK:
+      attributes:
+        id: PWM_PH_MASK
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: '7'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PWM_PH_U:
+      attributes:
+        id: PWM_PH_U
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0CHANNEL0
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_PH_V:
+      attributes:
+        id: PWM_PH_V
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0CHANNEL1
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_PH_W:
+      attributes:
+        id: PWM_PH_W
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0CHANNEL2
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_SET_DUTY_API:
+      attributes:
+        id: PWM_SET_DUTY_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWM24bitDutySet
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_START_API:
+      attributes:
+        id: PWM_START_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWMStart
+          type: Dynamic
+        type: Values
+      type: String
+    PWM_STOP_API:
+      attributes:
+        id: PWM_STOP_API
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: TCC0_PWMStop
+          type: Dynamic
+        type: Values
+      type: String
+    TCC_0PATT_PGE:
+      attributes:
+        id: TCC_0PATT_PGE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    TCC_0_WEXCTRL_DTIEN:
+      attributes:
+        id: TCC_0_WEXCTRL_DTIEN
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    TCC_CTRLBSET_DIR:
+      attributes:
+        id: TCC_CTRLBSET_DIR
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    TCC_DRVCTRL_INVEN0:
+      attributes:
+        id: TCC_DRVCTRL_INVEN0
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    TCC_EVCTRL_MCEO_0:
+      attributes:
+        id: TCC_EVCTRL_MCEO_0
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    TCC_EVCTRL_OVFEO:
+      attributes:
+        id: TCC_EVCTRL_OVFEO
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    TCC_MODULE_FREQUENCY:
+      attributes:
+        id: TCC_MODULE_FREQUENCY
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: '120000000'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TCC_PER_PER:
+      attributes:
+        id: TCC_PER_PER
+      children:
+      - children:
+        - attributes:
+            value: '149'
+          type: User
+        type: Values
+      type: Integer
+    TCC_RAMP_CH1_DUTY:
+      attributes:
+        id: TCC_RAMP_CH1_DUTY
+      children:
+      - children:
+        - attributes:
+            id: label
+          children:
+          - type: Value
+            value: Cycle A Duty Value (CC0 Buffer)
+          type: String
+        type: Attributes
+      - children:
+        - attributes:
+            id: tcc0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TCC_RAMP_CYCLEA_PERIOD:
+      attributes:
+        id: TCC_RAMP_CYCLEA_PERIOD
+      children:
+      - children:
+        - attributes:
+            id: label
+          children:
+          - type: Value
+            value: Cycle A Period Value (PER)
+          type: String
+        type: Attributes
+      - children:
+        - attributes:
+            id: tcc0
+            value: '149'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TCC_RAMP_CYCLEB_PERIOD:
+      attributes:
+        id: TCC_RAMP_CYCLEB_PERIOD
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: '149'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TCC_TIMER_PERIOD:
+      attributes:
+        id: TCC_TIMER_PERIOD
+      children:
+      - children:
+        - attributes:
+            id: tcc0
+            value: '119999'
+          type: Dynamic
+        type: Values
+      type: Long
+    TCC_TIMER_TIME_MS:
+      attributes:
+        id: TCC_TIMER_TIME_MS
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '139.81013'
+          type: Float
+        type: Attributes
+      type: Float
+    TCC_WEXCTRL_DTHS:
+      attributes:
+        id: TCC_WEXCTRL_DTHS
+      children:
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: Integer
+    TCC_WEXCTRL_DTLS:
+      attributes:
+        id: TCC_WEXCTRL_DTLS
+      children:
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: Integer
+    TCC_WEXCTRL_OTMX:
+      attributes:
+        id: TCC_WEXCTRL_OTMX
+      children:
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
+    TCC_RAMP_CH2_DUTY:
+      attributes:
+        id: TCC_RAMP_CH2_DUTY
+      children:
+      - children:
+        - attributes:
+            id: label
+          children:
+          - type: Value
+            value: Cycle B Duty Value (CC0)
+          type: String
+        type: Attributes
+      - children:
+        - attributes:
+            id: tcc0
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TCC_WAVE_RAMP:
+      attributes:
+        id: TCC_WAVE_RAMP
+      children:
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
+    TCC_0PATT_PGV:
+      attributes:
+        id: TCC_0PATT_PGV
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
+  userData: {}

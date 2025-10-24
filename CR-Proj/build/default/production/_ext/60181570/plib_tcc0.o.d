@@ -1,8 +1,7 @@
-build/default/debug/_ext/17022449/plib_sercom1_spi_master.o: \
- ../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c \
+build/default/production/_ext/60181570/plib_tcc0.o: \
+ ../src/config/default/peripheral/tcc/plib_tcc0.c \
  ../src/config/default/interrupts.h \
- ../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h \
- ../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h \
+ ../src/config/default/peripheral/tcc/plib_tcc0.h \
  ../src/config/default/device.h \
  ../src/packs/ATSAME51J20A_DFP/same51j20a.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/core_cm4.h \
@@ -106,13 +105,12 @@ build/default/debug/_ext/17022449/plib_sercom1_spi_master.o: \
  ../src/packs/ATSAME51J20A_DFP/pio/same51j20a.h \
  ../src/config/default/device_cache.h ../src/config/default/device.h \
  ../src/config/default/toolchain_specifics.h \
- ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h
+ ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h \
+ ../src/config/default/peripheral/tcc/plib_tcc_common.h
 
 ../src/config/default/interrupts.h:
 
-../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h:
-
-../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h:
+../src/config/default/peripheral/tcc/plib_tcc0.h:
 
 ../src/config/default/device.h:
 
@@ -323,3 +321,5 @@ build/default/debug/_ext/17022449/plib_sercom1_spi_master.o: \
 ../src/config/default/toolchain_specifics.h:
 
 ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h:
+
+../src/config/default/peripheral/tcc/plib_tcc_common.h:
