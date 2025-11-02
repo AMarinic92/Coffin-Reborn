@@ -7,9 +7,11 @@
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/config/default/peripheral/dmac/plib_dmac.h</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/config/default/definitions.h</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/config/default/initialization.c</file>
+            <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/config/default/peripheral/dmac/plib_dmac.c</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/packs/ATSAME51J20A_DFP/component/tcc.h</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/config/default/peripheral/tcc/plib_tcc0.c</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/packs/ATSAME51J20A_DFP/same51j20a.h</file>
+            <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/packs/ATSAME51J20A_DFP/component/dmac.h</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/main.c</file>
             <file>file:/C:/Users/andre/Documents/GitHub/Coffin-Reborn/src/neopixel.c</file>
         </group>

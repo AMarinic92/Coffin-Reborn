@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: tcc0
-          x: '170'
-          y: '176'
+          x: '223'
+          y: '138'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -177,7 +177,7 @@ data:
       children:
       - children:
         - attributes:
-            value: 'true'
+            value: 'false'
           type: User
         type: Values
       type: Boolean
@@ -402,4 +402,14 @@ data:
           type: User
         type: Values
       type: KeyValueSet
+    TCC_CTRLA_RUNSTDBY:
+      attributes:
+        id: TCC_CTRLA_RUNSTDBY
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
   userData: {}

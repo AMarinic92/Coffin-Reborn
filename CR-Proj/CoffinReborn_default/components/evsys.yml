@@ -277,7 +277,7 @@ data:
       - children:
         - attributes:
             id: evsys
-            value: 'false'
+            value: 'true'
           type: Dynamic
         type: Values
       type: Boolean
@@ -418,7 +418,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '15'
+            value: '84'
           type: User
         type: Values
       type: KeyValueSet
@@ -779,7 +779,7 @@ data:
       - children:
         - attributes:
             id: evsys
-            value: 'false'
+            value: 'true'
           type: Dynamic
         type: Values
       type: Boolean
@@ -801,6 +801,71 @@ data:
       - children:
         - attributes:
             value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
+    GENERATOR_DMAC_CH_0_ACTIVE:
+      attributes:
+        id: GENERATOR_DMAC_CH_0_ACTIVE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    USER_DMAC_CH_0_READY:
+      attributes:
+        id: USER_DMAC_CH_0_READY
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    EVSYS_INTERRUPT_MODE_OTHER:
+      attributes:
+        id: EVSYS_INTERRUPT_MODE_OTHER
+      children:
+      - children:
+        - attributes:
+            id: evsys
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    INTERRUPT_ACTIVE:
+      attributes:
+        id: INTERRUPT_ACTIVE
+      children:
+      - children:
+        - attributes:
+            id: evsys
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    EVSYS_INTERRUPT_MODE0:
+      attributes:
+        id: EVSYS_INTERRUPT_MODE0
+      children:
+      - children:
+        - attributes:
+            id: evsys
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    EVSYS_CHANNEL_0_PATH:
+      attributes:
+        id: EVSYS_CHANNEL_0_PATH
+      children:
+      - children:
+        - attributes:
+            value: '0'
           type: User
         type: Values
       type: KeyValueSet
