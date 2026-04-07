@@ -67,7 +67,7 @@ void TCC0_PWMInitialize(void)
     }
     /* Clock prescaler */
     TCC0_REGS->TCC_CTRLA = TCC_CTRLA_PRESCALER_DIV1
-                            | TCC_CTRLA_PRESCSYNC_PRESC ;
+                            | TCC_CTRLA_PRESCSYNC_PRESC | (TCC_CTRLA_RUNSTDBY_Msk);
     TCC0_REGS->TCC_WEXCTRL = TCC_WEXCTRL_OTMX(0UL);
     /* Dead time configurations */
     TCC0_REGS->TCC_WEXCTRL |= TCC_WEXCTRL_DTIEN1_Msk | TCC_WEXCTRL_DTIEN2_Msk | TCC_WEXCTRL_DTIEN3_Msk
@@ -85,9 +85,11 @@ void TCC0_PWMInitialize(void)
     TCC0_REGS->TCC_CC[5] = 0U;
     TCC0_REGS->TCC_PER = 149U;
 
-
+    //Enable double buggering
     TCC0_REGS->TCC_CTRLBCLR = TCC_CTRLBCLR_LUPD_Msk;
-
+    while((TCC0_REGS->TCC_SYNCBUSY & TCC_SYNCBUSY_CTRLB_Msk) == TCC_SYNCBUSY_CTRLB_Msk) {
+        /* Wait for sync */
+    }
     TCC0_REGS->TCC_EVCTRL = TCC_EVCTRL_OVFEO_Msk;
     while (TCC0_REGS->TCC_SYNCBUSY != 0U)
     {

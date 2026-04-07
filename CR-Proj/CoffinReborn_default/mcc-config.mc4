@@ -11,13 +11,14 @@ modules:
 - dfp
 - evsys
 - nvmctrl
+- sercom1
 - tcc0
 - trng
 generatedFileHashHistoryMap:
 - file: ..\src\config\default\ATSAME51J20A.ld
   hash: cf9e43606b6883c68912608a9a10db9fe47b5ee9e5c3bccf5cfc26bb7676f6d6
 - file: ..\src\config\default\definitions.h
-  hash: 8eab8fad5b2dabd140c53e93bb3813088b7feb80139cc95431a8ce3cdad29249
+  hash: b116646e505a37d4a2e82e661e8f0f42a0995d6c6b7aa22300d9ebb700d4bf30
 - file: ..\src\config\default\device.h
   hash: 238ff5a236ff86e1ff76d0fec3b8ea4472f5f787803514cf9116e2e0c2d5a7e2
 - file: ..\src\config\default\device_cache.h
@@ -27,7 +28,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: de00e84d46e0d8933ee2fae9d699e08456443d4f80ac78f87edada9c35a9d15f
 - file: ..\src\config\default\initialization.c
-  hash: fb08b9dfc3533c0781a8f062d83d2eff5208714dd6e498d2db468092264b1079
+  hash: 3c869eb0132da14328eeae287eb7893c328c41836c00c1dc18a0a35daf3c0526
 - file: ..\src\config\default\interrupts.c
   hash: cbcb1d01bf92dc956a921e62db323ddb9fab63e3550892775a0a939d41962a2e
 - file: ..\src\config\default\interrupts.h
@@ -35,7 +36,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\libc_syscalls.c
   hash: 88bb2e34c939601b5b7ad076556e3ee0fcedf388436b8cddb6d6fd3e9d07472f
 - file: ..\src\config\default\peripheral\clock\plib_clock.c
-  hash: 80d68a0eb41a0f47d8cdd16bfc93c4737f8c6b98590ea126625d0b1e9cc4f891
+  hash: c71a99c53fa48afee30aaa6a602c7c870bf56c188f55a6ed324ad07345f01ca0
 - file: ..\src\config\default\peripheral\clock\plib_clock.h
   hash: 59322a99314cb17c6b595d51d18769582e61189140188aa053acfdc671487f21
 - file: ..\src\config\default\peripheral\cmcc\plib_cmcc.c
@@ -43,7 +44,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\cmcc\plib_cmcc.h
   hash: 89b940242bfa0ecdba3ac53666c5996e25fab712227d37d2d6881c8a86b5f497
 - file: ..\src\config\default\peripheral\dmac\plib_dmac.c
-  hash: 9dee5dfb9cf3a2b98d834b760e385c7509eff5f842d9d6adfbef5d9ac486b3e2
+  hash: 541a359dade6b2246522a54b819cc1e3b2fef6ba45fc2131fb69bf6aefe14d0b
 - file: ..\src\config\default\peripheral\dmac\plib_dmac.h
   hash: 5141fb30e6ee14d6fb18d95b38c753e72a674b963d7fb9eba46ca43091bf7129
 - file: ..\src\config\default\peripheral\evsys\plib_evsys.c
@@ -59,9 +60,15 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\nvmctrl\plib_nvmctrl.h
   hash: fd7749dc74a885efd7c593394454abc74afc7cf184123f0315425a3600c26ac5
 - file: ..\src\config\default\peripheral\port\plib_port.c
-  hash: d3ba5a5b89abef19d9e26b5cf39f2bf788e755f18915f4abe97ad665484f5472
+  hash: 70313bd7f229dca795c7c3cc4727cb2a81007470a3e8bcabaa9b37afed7a09ec
 - file: ..\src\config\default\peripheral\port\plib_port.h
-  hash: bb34885fdcf2a022971c3941d7e93837e81cc59d3abe19e6335b8e17d7a4fa7e
+  hash: d63aadd0c5c2cd9e768377744122d0372c9ae443588fca8a8b94838dd20dd7f5
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.c
+  hash: 04c043fbbef69bae9065ecea24760a2c6746510ee4367daac8d018d745039b2a
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.h
+  hash: 94858ce75946aab8706a2b90a08d79a392fffb1a766510e906874e644e221886
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom_spi_master_common.h
+  hash: 06e3c7813e1608b5008e3c8955569f9cff04bef321a34c35421f7979368a4ada
 - file: ..\src\config\default\peripheral\systick\plib_systick.c
   hash: e3982d329a0e73f234397537cbf77bae1b5264dcff8406062addacc47bbca6f8
 - file: ..\src\config\default\peripheral\systick\plib_systick.h
@@ -77,7 +84,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\trng\plib_trng.h
   hash: ec9ba6d8690f41be428a6004d5c6434facf8c7e5fb0ab6a18a8ae30df7f17c90
 - file: ..\src\config\default\pin_configurations.csv
-  hash: 20658b4bdb6a573e4c5e1c46c66d7332c5e35545218798a505712fb1ec4e6691
+  hash: 2a1964ade4b4f202052faae26c0943e0beabdf92ec6b04a557e96545bd4fb3f7
 - file: ..\src\config\default\startup_xc32.c
   hash: f374b97d65f92553f1b75d8c9239b8b0f8581c710f78ea47b02c7f6fa6f74c74
 - file: ..\src\config\default\stdio\xc32_monitor.c

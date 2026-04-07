@@ -1,81 +1,134 @@
+/* =============================================================================
+ * neopixel.c  ?  WS2812B / NeoPixel driver via SERCOM SPI + DMAC
+ * Target : ATSAME51J20A   MPLAB X + MCC Melody + XC32
+ * ============================================================================= */
+
 #include "neopixel.h"
-#include "definitions.h"
-#include <stdint.h>
-#include <stdbool.h>
+#include "definitions.h"   /* MCC Melody umbrella ? pulls in SERCOM1, DMAC, SYSTICK */
+#include <string.h>
 
-// Buffer to hold TCC compare values
-uint8_t neopixel_tcc_buffer[144 * 24];
+/* ?? Internal state ??????????????????????????????????????????????????????????? */
 
-// TCC compare values for SK6812 timing
-#define TCC_ZERO_BIT  36   // ~300ns high
-#define TCC_ONE_BIT   72   // ~600ns high
+static uint8_t  neo_buf[NEO_BUF_SIZE];
+static volatile bool tx_done = false;
 
-// DMA complete flag
-volatile bool neopixel_dma_complete = false;
+/* ?? DMA callback ????????????????????????????????????????????????????????????? */
 
-// DMA Callback
-void NeoPixel_DMA_Callback(DMAC_TRANSFER_EVENT event, uintptr_t context) {
-    if(event == DMAC_TRANSFER_EVENT_COMPLETE) {
-        neopixel_dma_complete = true;
-    }
+static void NeoPixel_DMA_Callback(DMAC_TRANSFER_EVENT event, uintptr_t context)
+{
+    (void)context;
+    if (event == DMAC_TRANSFER_EVENT_COMPLETE)
+        tx_done = true;
 }
 
-// Initialize neopixel system
-void neopixel_init(void) {
-    // Register DMA callback
-    DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, NeoPixel_DMA_Callback, 0);
-    
-    // Disable pattern generator (if you had issues with it)
-    TCC0_REGS->TCC_PATT = 0;
-    TCC0_REGS->TCC_PATTBUF = 0;
+/* ?? Bit encoding ????????????????????????????????????????????????????????????? */
+
+/*
+ * encode_byte()
+ * Converts one 8-bit NeoPixel colour component into 3 SPI bytes.
+ *
+ * Each NeoPixel bit ? 3 SPI bits:
+ *   pixel '1'  ?  1 1 0  (0x6)
+ *   pixel '0'  ?  1 0 0  (0x4)
+ *
+ * 8 pixel bits × 3 SPI bits = 24 SPI bits = 3 bytes, packed MSB-first.
+ *
+ * Example: pixel byte 0xC0 = 1100 0000
+ *   bit7=1 ? 110 | bit6=1 ? 110 | bit5=0 ? 100 | bit4=0 ? 100 | ?
+ *   24-bit SPI word = 110 110 100 100 100 100 100 100
+ *                   = 1101 1010 0100 1001 0010 0100
+ *                   = 0xDA  0x49  0x24
+ */
+static inline void encode_byte(uint8_t pixel_byte, uint8_t *out)
+{
+    uint32_t word = 0;
+    for (int8_t i = 7; i >= 0; i--)
+    {
+        word = (word << 3u) | (((pixel_byte >> i) & 1u) ? 0x6u : 0x4u);
+    }
+    out[0] = (uint8_t)(word >> 16u);
+    out[1] = (uint8_t)(word >>  8u);
+    out[2] = (uint8_t)(word        );
 }
 
-void set_led_color_tcc(uint8_t led_index, uint8_t red, uint8_t green, uint8_t blue) {
-    if(led_index >= 144) return;
-    
-    // Calculate bit position in buffer (G-R-B order for SK6812)
-    uint16_t bit_offset = led_index * 24;
-    
-    // Green (8 bits, MSB first)
-    for(int i = 7; i >= 0; i--) {
-        neopixel_tcc_buffer[bit_offset++] = (green & (1 << i)) ? TCC_ONE_BIT : TCC_ZERO_BIT;
-    }
-    
-    // Red (8 bits, MSB first)
-    for(int i = 7; i >= 0; i--) {
-        neopixel_tcc_buffer[bit_offset++] = (red & (1 << i)) ? TCC_ONE_BIT : TCC_ZERO_BIT;
-    }
-    
-    // Blue (8 bits, MSB first)
-    for(int i = 7; i >= 0; i--) {
-        neopixel_tcc_buffer[bit_offset++] = (blue & (1 << i)) ? TCC_ONE_BIT : TCC_ZERO_BIT;
-    }
+/* ?? Public API implementation ???????????????????????????????????????????????? */
+
+void NeoPixel_Init(void)
+{
+    memset(neo_buf, 0x00, sizeof(neo_buf));
+    DMAC_ChannelCallbackRegister(DMAC_CHANNEL_NEO, NeoPixel_DMA_Callback, 0u);
 }
 
-void neopixel_send_tcc(void) {
-    // Set initial compare value
-    TCC0_REGS->TCC_CC[0] = neopixel_tcc_buffer[0];
-    
-    // Start DMA transfer
-    neopixel_dma_complete = false;
+void NeoPixel_SetPixel(uint8_t index, uint8_t r, uint8_t g, uint8_t b)
+{
+    if (index >= NUM_LEDS) return;
+
+    uint8_t *p = &neo_buf[(uint16_t)index * 9u];
+    encode_byte(g, p);       /* WS2812B / SK6812 wire order is G ? R ? B */
+    encode_byte(r, p + 3u);
+    encode_byte(b, p + 6u);
+}
+
+void NeoPixel_Clear(void)
+{
+    for (uint8_t i = 0; i < NUM_LEDS; i++)
+        NeoPixel_SetPixel(i, 0u, 0u, 0u);
+}
+
+void NeoPixel_Show(void)
+{
+    tx_done = false;
+
     DMAC_ChannelTransfer(
-        DMAC_CHANNEL_0,
-        neopixel_tcc_buffer,
-        (const void*)&TCC0_REGS->TCC_CCBUF[0],  // Buffered register
-        144 * 24
+        DMAC_CHANNEL_NEO,
+        (const void *)neo_buf,
+        (const void *)&SERCOM1_REGS->SPIM.SERCOM_DATA,
+        NEO_BUF_SIZE
     );
-    
-    
-    // Start TCC - DMA will feed data on each overflow
-    TCC0_PWMStart();
-    
-//     Wait for completion
-    while(!neopixel_dma_complete){
-        TCC0_PWMForceUpdate();
+
+    while (!tx_done)
+    {
+        /* optionally: asm("nop"); */
     }
-    // Stop TCC
-    TCC0_PWMStop();
-    
-    // Reset pulse (>80µs for SK6812)
-    SYSTICK_DelayUs(100);
+}
+
+/* ?? Colour helpers ??????????????????????????????????????????????????????????? */
+
+void NeoPixel_HSVtoRGB(uint8_t h, uint8_t s, uint8_t v,
+                        uint8_t *r, uint8_t *g, uint8_t *b)
+{
+    if (s == 0u)
+    {
+        *r = *g = *b = v;
+        return;
+    }
+
+    uint8_t region    = h / 43u;
+    uint8_t remainder = (uint8_t)((h - (region * 43u)) * 6u);
+
+    uint8_t p = (uint8_t)(((uint16_t)v * (255u - s)) >> 8u);
+    uint8_t q = (uint8_t)(((uint16_t)v * (255u - (((uint16_t)s * remainder) >> 8u))) >> 8u);
+    uint8_t t = (uint8_t)(((uint16_t)v * (255u - (((uint16_t)s * (255u - remainder)) >> 8u))) >> 8u);
+
+    switch (region)
+    {
+        case 0:  *r = v; *g = t; *b = p; break;
+        case 1:  *r = q; *g = v; *b = p; break;
+        case 2:  *r = p; *g = v; *b = t; break;
+        case 3:  *r = p; *g = q; *b = v; break;
+        case 4:  *r = t; *g = p; *b = v; break;
+        default: *r = v; *g = p; *b = q; break;
+    }
+}
+
+void NeoPixel_Rainbow(uint8_t offset, uint8_t brightness)
+{
+    for (uint8_t i = 0; i < NUM_LEDS; i++)
+    {
+        uint8_t hue = (uint8_t)(((uint16_t)i * 256u / NUM_LEDS) + offset);
+        uint8_t r, g, b;
+        NeoPixel_HSVtoRGB(hue, 255u, brightness, &r, &g, &b);
+        NeoPixel_SetPixel(i, r, g, b);
+    }
+    NeoPixel_Show();
 }

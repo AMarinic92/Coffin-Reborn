@@ -96,6 +96,10 @@
 #define NeoPixelSPI_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 16U)) & 0x01U)
 #define NeoPixelSPI_PIN                  PORT_PIN_PA16
 
+/*** Macros for NeoPixelSPICLK pin ***/
+#define NeoPixelSPICLK_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 17U)) & 0x01U)
+#define NeoPixelSPICLK_PIN                  PORT_PIN_PA17
+
 /*** Macros for SUND pin ***/
 #define SUND_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 19U))
 #define SUND_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 19U))

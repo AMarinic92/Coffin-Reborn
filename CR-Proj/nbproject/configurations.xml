@@ -28,6 +28,12 @@
             <logicalFolder name="port" displayName="port" projectFiles="true">
               <itemPath>../src/config/default/peripheral/port/plib_port.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="sercom" displayName="sercom" projectFiles="true">
+              <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
             <logicalFolder name="systick" displayName="systick" projectFiles="true">
               <itemPath>../src/config/default/peripheral/systick/plib_systick.h</itemPath>
             </logicalFolder>
@@ -178,6 +184,7 @@
       </logicalFolder>
       <itemPath>../src/neopixel.h</itemPath>
       <itemPath>../src/dsun_sensor.h</itemPath>
+      <itemPath>../src/lcd_i2c.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -193,6 +200,7 @@
           <itemPath>CoffinReborn_default/components/tcc0.yml</itemPath>
           <itemPath>CoffinReborn_default/components/trng.yml</itemPath>
           <itemPath>CoffinReborn_default/components/nvmctrl.yml</itemPath>
+          <itemPath>CoffinReborn_default/components/sercom1.yml</itemPath>
         </logicalFolder>
         <itemPath>CoffinReborn_default/mcc-config.mc4</itemPath>
       </logicalFolder>
@@ -244,6 +252,11 @@
             <logicalFolder name="port" displayName="port" projectFiles="true">
               <itemPath>../src/config/default/peripheral/port/plib_port.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="sercom" displayName="sercom" projectFiles="true">
+              <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c</itemPath>
+              </logicalFolder>
+            </logicalFolder>
             <logicalFolder name="systick" displayName="systick" projectFiles="true">
               <itemPath>../src/config/default/peripheral/systick/plib_systick.c</itemPath>
             </logicalFolder>
@@ -267,6 +280,7 @@
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/neopixel.c</itemPath>
       <itemPath>../src/dsun_sensor.c</itemPath>
+      <itemPath>../src/lcd_i2c.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
