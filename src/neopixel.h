@@ -67,6 +67,10 @@ void NeoPixel_Show(void);
  */
 void NeoPixel_Rainbow(uint8_t offset, uint8_t brightness);
 
+void NeoPixel_GreenPurple(uint8_t offset, uint8_t brightness);
+
+void NeoPixel_Fire(uint8_t offset, uint8_t brightness);
+
 /**
  * HSV ? RGB helper (public so main.c can compose custom effects).
  * h,s,v : 0-255

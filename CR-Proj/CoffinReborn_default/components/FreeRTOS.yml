@@ -1,0 +1,45 @@
+configVersion: 1.0.0
+componentName: FreeRTOS
+coreVersion: 5.8.4
+device: ATSAME51J20A
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: FreeRTOS
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: FreeRTOS-Kernel
+  type: package
+  version: V11.3.0
+- dependencyPackage: ''
+  name: core
+  type: package
+  version: v3.16.2
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: FreeRTOS
+          x: '216'
+          y: '386'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    FREERTOS_USE_APPLICATION_TASK_TAG:
+      attributes:
+        id: FREERTOS_USE_APPLICATION_TASK_TAG
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+  userData: {}

@@ -132,3 +132,78 @@ void NeoPixel_Rainbow(uint8_t offset, uint8_t brightness)
     }
     NeoPixel_Show();
 }
+
+
+void NeoPixel_GreenPurple(uint8_t offset, uint8_t brightness)
+{
+    const uint8_t hueStart = 85;   // Green
+    const uint8_t hueEnd   = 200;  // Purple
+    const uint8_t hueRange = hueEnd - hueStart;
+
+    for (uint8_t i = 0; i < NUM_LEDS; i++)
+    {
+        uint8_t pos = (uint8_t)(((uint16_t)i * 256u / NUM_LEDS) + offset);
+
+        // Scale position into our limited hue range
+        uint8_t hue = hueStart + ((uint16_t)pos * hueRange >> 8);
+
+        uint8_t r, g, b;
+        NeoPixel_HSVtoRGB(hue, 255u, brightness, &r, &g, &b);
+        NeoPixel_SetPixel(i, r, g, b);
+    }
+    NeoPixel_Show();
+}
+
+static uint8_t hash8(uint16_t x)
+{
+    // Better hash with 16-bit input
+    x ^= x >> 8;
+    x *= 0x9E37;   // good mixing constant
+    x ^= x >> 8;
+    return (uint8_t)x;
+}
+
+static uint8_t lerp8by16(uint8_t a, uint8_t b, uint16_t t)
+{
+    // t = 0?65535
+    return a + (((uint32_t)(b - a) * t) >> 16);
+}
+
+void NeoPixel_Fire(uint8_t offset, uint8_t brightness)
+{
+    for (uint8_t i = 0; i < NUM_LEDS; i++)
+    {
+        // High-resolution position (key difference)
+        uint16_t x = ((uint16_t)i * 256u) + ((uint16_t)offset * 64u);
+
+        uint16_t xi = x >> 8;      // integer part
+        uint16_t xf = x & 0xFF;    // fractional part
+
+        // Smoothstep (proper easing curve)
+        uint16_t t = (uint16_t)xf * xf * (65535u - (xf << 1)) >> 16;
+
+        uint8_t n0 = hash8(xi);
+        uint8_t n1 = hash8(xi + 1);
+
+        uint8_t noise = lerp8by16(n0, n1, t);
+
+        // Shape into flame intensity
+        uint16_t heat16 = (uint16_t)noise * noise;
+        uint8_t heat = (uint8_t)(heat16 >> 8);
+
+        // Boost low end so strip is never "dead"
+        heat = (heat >> 1) + 40;
+
+        uint8_t value = (heat > brightness) ? brightness : heat;
+
+        // Fire color mapping (tuned range)
+        uint8_t hue = (uint8_t)((uint16_t)heat * 50u / 255u);
+
+        uint8_t r, g, b;
+        NeoPixel_HSVtoRGB(hue, 255u, value, &r, &g, &b);
+
+        NeoPixel_SetPixel(i, r, g, b);
+    }
+
+    NeoPixel_Show();
+}

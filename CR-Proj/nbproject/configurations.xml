@@ -51,6 +51,39 @@
           <itemPath>../src/config/default/definitions.h</itemPath>
           <itemPath>../src/config/default/interrupts.h</itemPath>
           <itemPath>../src/config/default/device_vectors.h</itemPath>
+          <itemPath>../src/config/default/FreeRTOSConfig.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="FreeRTOS" displayName="FreeRTOS" projectFiles="true">
+        <logicalFolder name="Source" displayName="Source" projectFiles="true">
+          <logicalFolder name="include" displayName="include" projectFiles="true">
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/croutine.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/event_groups.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/list.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/portable.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/projdefs.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/queue.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/semphr.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/stack_macros.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/task.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/timers.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/mpu_prototypes.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/mpu_syscall_numbers.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/stream_buffer.h</itemPath>
+            <itemPath>../src/third_party/rtos/FreeRTOS/Source/include/message_buffer.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="portable" displayName="portable" projectFiles="true">
+            <logicalFolder name="GCC" displayName="GCC" projectFiles="true">
+              <logicalFolder name="SAM" displayName="SAM" projectFiles="true">
+                <logicalFolder name="ARM_CM4F" displayName="ARM_CM4F" projectFiles="true">
+                  <itemPath>../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/portmacro.h</itemPath>
+                </logicalFolder>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
@@ -199,6 +232,7 @@
           <itemPath>CoffinReborn_default/components/cmsis.yml</itemPath>
           <itemPath>CoffinReborn_default/components/tcc0.yml</itemPath>
           <itemPath>CoffinReborn_default/components/trng.yml</itemPath>
+          <itemPath>CoffinReborn_default/components/FreeRTOS.yml</itemPath>
           <itemPath>CoffinReborn_default/components/nvmctrl.yml</itemPath>
           <itemPath>CoffinReborn_default/components/sercom1.yml</itemPath>
         </logicalFolder>
@@ -275,6 +309,30 @@
           <itemPath>../src/config/default/exceptions.c</itemPath>
           <itemPath>../src/config/default/startup_xc32.c</itemPath>
           <itemPath>../src/config/default/libc_syscalls.c</itemPath>
+          <itemPath>../src/config/default/freertos_hooks.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="FreeRTOS" displayName="FreeRTOS" projectFiles="true">
+        <logicalFolder name="Source" displayName="Source" projectFiles="true">
+          <logicalFolder name="portable" displayName="portable" projectFiles="true">
+            <logicalFolder name="GCC" displayName="GCC" projectFiles="true">
+              <logicalFolder name="SAM" displayName="SAM" projectFiles="true">
+                <logicalFolder name="ARM_CM4F" displayName="ARM_CM4F" projectFiles="true">
+                  <itemPath>../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/port.c</itemPath>
+                </logicalFolder>
+              </logicalFolder>
+            </logicalFolder>
+            <logicalFolder name="MemMang" displayName="MemMang" projectFiles="true">
+              <itemPath>../src/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/croutine.c</itemPath>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/list.c</itemPath>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/queue.c</itemPath>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/FreeRTOS_tasks.c</itemPath>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/timers.c</itemPath>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/event_groups.c</itemPath>
+          <itemPath>../src/third_party/rtos/FreeRTOS/Source/stream_buffer.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
@@ -349,7 +407,7 @@
         <property key="exclude-floating-point" value="false"/>
         <property key="expand-pragma-config" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/ATSAME51J20A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
+                  value="../src;../src/config/default;../src/packs/ATSAME51J20A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/third_party/rtos/FreeRTOS/Source/include;../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -469,7 +527,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/ATSAME51J20A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
+                  value="../src;../src/config/default;../src/packs/ATSAME51J20A_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/third_party/rtos/FreeRTOS/Source/include;../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

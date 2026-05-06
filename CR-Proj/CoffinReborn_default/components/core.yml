@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: core
-coreVersion: 5.8.2
+coreVersion: 5.8.4
 device: ATSAME51J20A
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.23.0
+  version: v3.25.1
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -4055,6 +4055,552 @@ data:
         - attributes:
             value: 'true'
           type: User
+        type: Values
+      type: Boolean
+    WDT_HEADER:
+      attributes:
+        id: WDT_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    WDT_SOURCE:
+      attributes:
+        id: WDT_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    WDT_SYS_DEF:
+      attributes:
+        id: WDT_SYS_DEF
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    WDT_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: WDT_INTERRUPT_ENABLE_UPDATE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_10_0_ENABLE:
+      attributes:
+        id: NVIC_10_0_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    WDT_INTERRUPT_ENABLE:
+      attributes:
+        id: WDT_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_10_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_10_0_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    WDT_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: WDT_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_10_0_HANDLER:
+      attributes:
+        id: NVIC_10_0_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: WDT_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    WDT_USE:
+      attributes:
+        id: WDT_USE
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    WDT_INTERRUPT_HANDLER:
+      attributes:
+        id: WDT_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: WDT_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    PAC_HEADER:
+      attributes:
+        id: PAC_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PAC_SOURCE:
+      attributes:
+        id: PAC_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PAC_SYS_DEF:
+      attributes:
+        id: PAC_SYS_DEF
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PAC_SYS_INIT:
+      attributes:
+        id: PAC_SYS_INIT
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PAC_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: PAC_INTERRUPT_ENABLE_UPDATE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_41_0_ENABLE:
+      attributes:
+        id: NVIC_41_0_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    PAC_INTERRUPT_ENABLE:
+      attributes:
+        id: PAC_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_41_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_41_0_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    PAC_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: PAC_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_41_0_HANDLER:
+      attributes:
+        id: NVIC_41_0_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: PAC_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    PAC_INTERRUPT_HANDLER:
+      attributes:
+        id: PAC_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: PAC_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    PAC_USE:
+      attributes:
+        id: PAC_USE
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    PLIB_MPU_H:
+      attributes:
+        id: PLIB_MPU_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PLIB_MPU_LOCAL_H:
+      attributes:
+        id: PLIB_MPU_LOCAL_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PLIB_MPU_C:
+      attributes:
+        id: PLIB_MPU_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    MPU_SYSTEM_DEFINITIONS_H:
+      attributes:
+        id: MPU_SYSTEM_DEFINITIONS_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    CoreUseMPU:
+      attributes:
+        id: CoreUseMPU
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    DATA_CACHE_ENABLE:
+      attributes:
+        id: DATA_CACHE_ENABLE
+      children:
+      - children:
+        - attributes:
+            value: 'false'
+          type: User
+        type: Values
+      type: Boolean
+    NVIC_-1_0_HANDLER:
+      attributes:
+        id: NVIC_-1_0_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: xPortSysTickHandler
+          type: Dynamic
+        type: Values
+      type: String
+    SysTick_INTERRUPT_HANDLER:
+      attributes:
+        id: SysTick_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: xPortSysTickHandler
+          type: Dynamic
+        type: Values
+      type: String
+    PendSV_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: PendSV_INTERRUPT_ENABLE_UPDATE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_-2_0_ENABLE:
+      attributes:
+        id: NVIC_-2_0_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    PendSV_INTERRUPT_ENABLE:
+      attributes:
+        id: PendSV_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_-2_0_HANDLER:
+      attributes:
+        id: NVIC_-2_0_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: xPortPendSVHandler
+          type: Dynamic
+        type: Values
+      type: String
+    PendSV_INTERRUPT_HANDLER:
+      attributes:
+        id: PendSV_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: xPortPendSVHandler
+          type: Dynamic
+        type: Values
+      type: String
+    NVIC_-2_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_-2_0_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    PendSV_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: PendSV_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    SVCall_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: SVCall_INTERRUPT_ENABLE_UPDATE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_-5_0_ENABLE:
+      attributes:
+        id: NVIC_-5_0_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    SVCall_INTERRUPT_ENABLE:
+      attributes:
+        id: SVCall_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_-5_0_HANDLER:
+      attributes:
+        id: NVIC_-5_0_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: vPortSVCHandler
+          type: Dynamic
+        type: Values
+      type: String
+    SVCall_INTERRUPT_HANDLER:
+      attributes:
+        id: SVCall_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: vPortSVCHandler
+          type: Dynamic
+        type: Values
+      type: String
+    NVIC_-5_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_-5_0_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    SVCall_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: SVCall_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_-1_0_PRIORITY_LOCK:
+      attributes:
+        id: NVIC_-1_0_PRIORITY_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_-1_0_PRIORITY:
+      attributes:
+        id: NVIC_-1_0_PRIORITY
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '7'
+          type: Dynamic
+        type: Values
+      type: Combo
+    NVIC_-5_0_PRIORITY_LOCK:
+      attributes:
+        id: NVIC_-5_0_PRIORITY_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
         type: Values
       type: Boolean
   userData:

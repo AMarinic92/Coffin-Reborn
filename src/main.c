@@ -29,6 +29,8 @@
 #include "definitions.h"
 #include "neopixel.h"
 #include "dsun_sensor.h"
+#include "FreeRTOS.h"
+#include "task.
 
 // *****************************************************************************
 // *****************************************************************************
@@ -45,15 +47,46 @@ uint32_t seconds(void) {
 }
 
 
+// 1. Move your bare-metal while(1) loop into a dedicated Task function
+void NeoPixel_Task(void *pvParameters)
+{
+    uint8_t frame = 0;
+    
+    while(1)
+    {
+        // NeoPixel_Rainbow(frame++, 80);
+        // NeoPixel_Fire(frame++, 80);
+        NeoPixel_GreenPurple(frame++, 80);
+        
+        // 2. Replace the blocking SysTick delay with an RTOS thread yield
+        // This frees the CPU to run other animatronic tasks for 20ms
+        vTaskDelay(pdMS_TO_TICKS(20)); 
+    }
+}
+
 int main(void)
 {
+    // Initialize Harmony hardware drivers
     SYS_Initialize(NULL);
     NeoPixel_Init();
 
-    uint8_t frame = 0;
-    while (1)
+    // 3. Register the task with the OS before starting the scheduler
+    xTaskCreate(
+        NeoPixel_Task,       // Function pointer to your task
+        "NeoPixel",          // Debug name
+        512,                 // Stack size in words (adjust if NeoPixel library uses heavy local vars)
+        NULL,                // Task parameters
+        1,                   // Priority (1 is standard low priority)
+        NULL                 // Task handle
+    );
+
+    // 4. Hand control to FreeRTOS. 
+    vTaskStartScheduler();
+
+    // 5. Code below this line never executes unless heap_4 runs out of RAM during init.
+    while(1)
     {
-        NeoPixel_Rainbow(frame++, 80);  // 80/255 brightness ? safe for USB power
-        SYSTICK_DelayMs(20);            // ~50 fps
     }
+    
+    return 0;
 }

@@ -4,18 +4,20 @@
 
 
 project: CoffinReborn
-creation_date: 2026-04-07T17:51:54.048-05:00[America/Chicago]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2026-05-05T23:06:36.790-05:00[America/Chicago]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
-mcc_version: v5.6.2
-mcc_core_version: v5.8.2
+mcc_version: v5.6.4
+mcc_core_version: v5.8.4
 mplabx_version: v6.25        # if MPLAB X plugin only
-harmony_version: v5.6.2
+harmony_version: v5.6.4
 compiler: XC32 4.60
 
 modules:
-    - {name: "csp", version: "v3.23.0"}
-    - {name: "CMSIS_5", version: "5.9.1-dev"}
+    - {name: "csp", version: "v3.25.1"}
+    - {name: "core", version: "v3.16.2"}
+    - {name: "CMSIS_5", version: "5.9.0"}
+    - {name: "FreeRTOS-Kernel", version: "V11.3.0"}
 
 packs:
     - {name: "SAME51_DFP", version: "3.8.253"}
