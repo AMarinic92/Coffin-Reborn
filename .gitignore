@@ -1,0 +1,21 @@
+# --- MCC & Harmony Backups ---
+# Ignores all CoffinReborn_default.bak1, .bak2, etc.
+*.bak*
+
+# --- MPLAB X Build Outputs ---
+# Do not track compiled binaries, hex files, or object files
+build/
+dist/
+debug/
+*.o
+*.d
+*.elf
+*.hex
+*.map
+
+# --- MPLAB X Private/Local Settings ---
+# These contain absolute paths to your specific C:\Users\andre\... directories
+# and should not be tracked in source control.
+nbproject/private/
+nbproject/Makefile-local-*
+nbproject/Package-*.bash

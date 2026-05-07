@@ -1,92 +1,113 @@
-/*******************************************************************************
-  Main Source File
-
-  @Company
-    Microchip Technology Inc.
-
-  @File Name
-    main.c
-
-  @Summary
-    This file contains the "main" function for a project.
-
-  @Description
-    This file contains the "main" function for a project. The
-    "main" function calls the "SYS_Initialize" function to initialize the state
-    machines of all modules in the system
- *******************************************************************************/
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
-
-#include <stddef.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "definitions.h"
-#include "neopixel.h"
-#include "dsun_sensor.h"
+#include "definitions.h" // Harmony generated
+#include <sam.h>
 #include "FreeRTOS.h"
-#include "task.
+#include "task.h"
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Main Entry Point
-// *****************************************************************************
-// *****************************************************************************
+// Your custom packages
+#include "actuator.h"
+#include "neopixel.h" // Ensure your NeoPixel header is included
+#include <stdio.h>
+#define DEBUG_WAIT 10000000UL
 
-uint32_t millis(void) {
-    return SYSTICK_GetTickCounter();
+// Define an LED pin for your heartbeat (assuming PA14)
+#define BLINKY_LED_PIN PORT_PA14
+
+// ---------------------------------------------------------
+// Blinky RTOS Task
+// ---------------------------------------------------------
+void Blinky_Task(void *pvParameters)
+{
+    // Setup LED pin as output
+    PORT_REGS->GROUP[0].PORT_DIRSET = BLINKY_LED_PIN;
+
+    while(1)
+    {
+        // Toggle the LED
+        PORT_REGS->GROUP[0].PORT_OUTTGL = BLINKY_LED_PIN;
+        // Sleep this task for 500ms (1Hz blink rate)
+        vTaskDelay(pdMS_TO_TICKS(500)); 
+    }
 }
 
-uint32_t seconds(void) {
-    return (millis()) / (1000);
-}
-
-
-// 1. Move your bare-metal while(1) loop into a dedicated Task function
+// ---------------------------------------------------------
+// NeoPixel RTOS Task
+// ---------------------------------------------------------
 void NeoPixel_Task(void *pvParameters)
 {
     uint8_t frame = 0;
     
     while(1)
     {
-        // NeoPixel_Rainbow(frame++, 80);
-        // NeoPixel_Fire(frame++, 80);
-        NeoPixel_GreenPurple(frame++, 80);
-        
-        // 2. Replace the blocking SysTick delay with an RTOS thread yield
-        // This frees the CPU to run other animatronic tasks for 20ms
+    // Execute the NeoPixel animation
+    NeoPixel_GreenPurple(frame++, 80);
+      
+        // Yield the CPU for 20ms (~50 FPS update rate)
         vTaskDelay(pdMS_TO_TICKS(20)); 
     }
 }
 
+// ---------------------------------------------------------
+// Main Entry
+// ---------------------------------------------------------
 int main(void)
 {
-    // Initialize Harmony hardware drivers
+
+    // Cache Enable (Improves performance for NeoPixel math & RTOS context switching)
+    if ((CMCC_REGS->CMCC_SR & CMCC_SR_CSTS_Msk) == 0) {
+        CMCC_REGS->CMCC_CTRL = CMCC_CTRL_CEN_Msk;
+    }
+
+    // 1. Initialize System and Hardware Drivers
     SYS_Initialize(NULL);
+    
+    // 2. Initialize Custom Peripherals
+    Actuator_InitPorts();
     NeoPixel_Init();
 
-    // 3. Register the task with the OS before starting the scheduler
+#ifndef NDEBUG
+    printf("~~~DEBUG ENABLED~~~\n");
+#endif
+
+    // 3. Create RTOS Tasks
+    
+    // Low priority system heartbeat
     xTaskCreate(
-        NeoPixel_Task,       // Function pointer to your task
-        "NeoPixel",          // Debug name
-        512,                 // Stack size in words (adjust if NeoPixel library uses heavy local vars)
-        NULL,                // Task parameters
-        1,                   // Priority (1 is standard low priority)
-        NULL                 // Task handle
+        Blinky_Task,              
+        "Blinky",                 
+        configMINIMAL_STACK_SIZE, 
+        NULL,                     
+        1,                        
+        NULL                      
     );
 
-    // 4. Hand control to FreeRTOS. 
+    // Medium priority logic controller
+    // Currently appears bugged as this will break blinky 
+ 
+    xTaskCreate(
+        Actuator_Task,            // Implemented in actuator.c
+        "Actuator",               
+        512,                      // Increased stack for RNG and logic
+        NULL,                     
+        2,                        
+        NULL                      
+    );
+
+    // High priority visual updates (Keeps animations smooth)
+    xTaskCreate(
+        NeoPixel_Task,            
+        "NeoPixel",               
+        512,                      // Increased stack for NeoPixel array buffering
+        NULL,                     
+        3,                        
+        NULL                      
+    );
+
+    // 4. Hand control to the FreeRTOS Scheduler
+    // Execution context shifts here. The bare-metal while(1) loop is gone.
     vTaskStartScheduler();
 
-    // 5. Code below this line never executes unless heap_4 runs out of RAM during init.
-    while(1)
-    {
-    }
+    // 5. Code below this line never executes unless heap memory allocation fails.
+    while (1) {}
     
     return 0;
 }

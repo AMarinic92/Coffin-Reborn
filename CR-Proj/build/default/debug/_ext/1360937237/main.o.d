@@ -116,8 +116,19 @@ build/default/debug/_ext/1360937237/main.o: ../src/main.c \
  ../src/config/default/peripheral/systick/plib_systick.h \
  ../src/config/default/peripheral/dmac/plib_dmac.h \
  ../src/config/default/peripheral/cmcc/plib_cmcc.h \
- ../src/config/default/peripheral/trng/plib_trng.h ../src/neopixel.h \
- ../src/dsun_sensor.h
+ ../src/config/default/peripheral/trng/plib_trng.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h \
+ ../src/config/default/FreeRTOSConfig.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/projdefs.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/portable.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h \
+ ../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/portmacro.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/task.h \
+ ../src/third_party/rtos/FreeRTOS/Source/include/list.h ../src/actuator.h \
+ ../src/neopixel.h
 
 ../src/config/default/definitions.h:
 
@@ -357,6 +368,28 @@ build/default/debug/_ext/1360937237/main.o: ../src/main.c \
 
 ../src/config/default/peripheral/trng/plib_trng.h:
 
-../src/neopixel.h:
+../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.h:
 
-../src/dsun_sensor.h:
+../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h:
+
+../src/config/default/FreeRTOSConfig.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/projdefs.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/portable.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h:
+
+../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/portmacro.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/task.h:
+
+../src/third_party/rtos/FreeRTOS/Source/include/list.h:
+
+../src/actuator.h:
+
+../src/neopixel.h:

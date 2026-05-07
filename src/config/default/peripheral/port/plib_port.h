@@ -109,6 +109,32 @@
 #define SUND_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 19U)) & 0x01U)
 #define SUND_PIN                  PORT_PIN_PA19
 
+/*** Macros for usb_debugging_tx pin ***/
+#define usb_debugging_tx_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 16U)) & 0x01U)
+#define usb_debugging_tx_PIN                  PORT_PIN_PB16
+
+/*** Macros for usb_debugging_rx pin ***/
+#define usb_debugging_rx_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 17U)) & 0x01U)
+#define usb_debugging_rx_PIN                  PORT_PIN_PB17
+
+/*** Macros for RELAY_1 pin ***/
+#define RELAY_1_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 20U))
+#define RELAY_1_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 20U))
+#define RELAY_1_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 20U))
+#define RELAY_1_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 20U))
+#define RELAY_1_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 20U))
+#define RELAY_1_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 20U)) & 0x01U)
+#define RELAY_1_PIN                  PORT_PIN_PA20
+
+/*** Macros for RELAY_2 pin ***/
+#define RELAY_2_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 21U))
+#define RELAY_2_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 21U))
+#define RELAY_2_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 21U))
+#define RELAY_2_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 21U))
+#define RELAY_2_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 21U))
+#define RELAY_2_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 21U)) & 0x01U)
+#define RELAY_2_PIN                  PORT_PIN_PA21
+
 // *****************************************************************************
 /* PORT Group
 

@@ -23,18 +23,18 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 26,PB13,,Available,,,,,,NORMAL
 27,PB14,,Available,,,,,,NORMAL
 28,PB15,,Available,,,,,,NORMAL
-29,PA12,,SERCOM2_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
-30,PA13,,SERCOM2_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
+29,PA12,,Available,,,,,,NORMAL
+30,PA13,,Available,,,,,,NORMAL
 31,PA14,onboard_LED,GPIO,Digital,Out,Low,,,STRONG
 32,PA15,,Available,,,,,,NORMAL
 35,PA16,NeoPixelSPI,SERCOM1_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
 36,PA17,NeoPixelSPICLK,SERCOM1_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
 37,PA18,,Available,,,,,,NORMAL
 38,PA19,SUND,GPIO,Digital,In,n/a,No,Yes,NORMAL
-39,PB16,,Available,,,,,,NORMAL
-40,PB17,,Available,,,,,,NORMAL
-41,PA20,,Available,,,,,,NORMAL
-42,PA21,,Available,,,,,,NORMAL
+39,PB16,usb_debugging_tx,SERCOM5_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
+40,PB17,usb_debugging_rx,SERCOM5_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
+41,PA20,RELAY_1,GPIO,Digital,In/Out,Low,,,NORMAL
+42,PA21,RELAY_2,GPIO,Digital,In/Out,Low,,,NORMAL
 43,PA22,,Available,,,,,,NORMAL
 44,PA23,,Available,,,,,,NORMAL
 45,PA24,,Available,,,,,,NORMAL

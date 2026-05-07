@@ -12,6 +12,8 @@ modules:
 - evsys
 - nvmctrl
 - sercom1
+- sercom5
+- stdio
 - tcc0
 - trng
 generatedFileHashHistoryMap:
@@ -20,7 +22,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\FreeRTOSConfig.h
   hash: ae2fd8177b842b4baace215c45f2f7179362a839127237d6aa93b4600de7acd7
 - file: ..\src\config\default\definitions.h
-  hash: 9194188ce1df31531c4c4201b2b8ecd1c3897f6957436162e78e370f178b0ec3
+  hash: 5c57966d33f67a436e53436e512628d4e558a978e8b825ec3953af95188dbc29
 - file: ..\src\config\default\device.h
   hash: 2831bdc39f1830b078f223cee62407c27a5ad9a8b7b308c91aeba540a573d123
 - file: ..\src\config\default\device_cache.h
@@ -32,7 +34,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\freertos_hooks.c
   hash: c97b8f92ad60ff513a27ac7a27b3c6824b75005eb8f7b85fe5ae18deaf568c4e
 - file: ..\src\config\default\initialization.c
-  hash: 8ed8caa4641d880b649ebb05fa085485d6eca85d2f68658438c9139f2d24b8c8
+  hash: d8446d147d76fd0686436346409598f864f3657dcb6bed2c0e58cedc9bd696da
 - file: ..\src\config\default\interrupts.c
   hash: 50902ef00f17aec0e152ec86b83f3df0eff4f7833edcf866cbba1c589d0fcf30
 - file: ..\src\config\default\interrupts.h
@@ -40,7 +42,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\libc_syscalls.c
   hash: c9afc1b1257829415a1a6746ce3744f0a768b339d59fff2ab3ca1fab58b2a916
 - file: ..\src\config\default\peripheral\clock\plib_clock.c
-  hash: 0e62ed9124dd4ab9ab3dd976c8917158e2be83c5bb3f4dc3389afc196f6cfd90
+  hash: 223b30ea5fa9e67a4ce5787dc01253e85979d69c95da228581f22b27b035374b
 - file: ..\src\config\default\peripheral\clock\plib_clock.h
   hash: 59322a99314cb17c6b595d51d18769582e61189140188aa053acfdc671487f21
 - file: ..\src\config\default\peripheral\cmcc\plib_cmcc.c
@@ -64,15 +66,21 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\nvmctrl\plib_nvmctrl.h
   hash: fd7749dc74a885efd7c593394454abc74afc7cf184123f0315425a3600c26ac5
 - file: ..\src\config\default\peripheral\port\plib_port.c
-  hash: 70313bd7f229dca795c7c3cc4727cb2a81007470a3e8bcabaa9b37afed7a09ec
+  hash: 8e1551a8676da6ce8a819f228301b534826280adb5739dba737ae1354b0de90d
 - file: ..\src\config\default\peripheral\port\plib_port.h
-  hash: d63aadd0c5c2cd9e768377744122d0372c9ae443588fca8a8b94838dd20dd7f5
+  hash: 73c17b14cbc572452863dfdee7d3ea5192339e48d7197050b1f4a36b8d25e63d
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.c
   hash: 04c043fbbef69bae9065ecea24760a2c6746510ee4367daac8d018d745039b2a
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.h
   hash: 94858ce75946aab8706a2b90a08d79a392fffb1a766510e906874e644e221886
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom_spi_master_common.h
   hash: 06e3c7813e1608b5008e3c8955569f9cff04bef321a34c35421f7979368a4ada
+- file: ..\src\config\default\peripheral\sercom\usart\plib_sercom5_usart.c
+  hash: 04bdf5aa7586e6c0b4d9cf61abc6d49a2106420885a2d2fcc0ae29ddafb439be
+- file: ..\src\config\default\peripheral\sercom\usart\plib_sercom5_usart.h
+  hash: 6199a53d33d0db4eae0df327b00b41b8733621c2ca6e25f5ba62bab29057d0d0
+- file: ..\src\config\default\peripheral\sercom\usart\plib_sercom_usart_common.h
+  hash: 3653b66472c558c50f7037a1dd25d2678e9a13aa718f3c53a2195e6f3919ea48
 - file: ..\src\config\default\peripheral\systick\plib_systick.c
   hash: e3982d329a0e73f234397537cbf77bae1b5264dcff8406062addacc47bbca6f8
 - file: ..\src\config\default\peripheral\systick\plib_systick.h
@@ -88,11 +96,11 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\trng\plib_trng.h
   hash: ec9ba6d8690f41be428a6004d5c6434facf8c7e5fb0ab6a18a8ae30df7f17c90
 - file: ..\src\config\default\pin_configurations.csv
-  hash: 2a1964ade4b4f202052faae26c0943e0beabdf92ec6b04a557e96545bd4fb3f7
+  hash: 7c802cd6c6187b32c4a32e17840e1ace9618a06626c1e667f650d9ff883be087
 - file: ..\src\config\default\startup_xc32.c
   hash: 2916a631dd72c23f29daf3ec7ebc84abec03a29948825df0b1505d670d73fe50
 - file: ..\src\config\default\stdio\xc32_monitor.c
-  hash: 858f8710d4287200a5ee7f3b3ad7c24f505aed9c05c16956ab0ff9f7bb162a6a
+  hash: f22930f8c6b125d13886bec2b438e82435fbba6242e31aada0fb6f4ed3d45bb5
 - file: ..\src\config\default\toolchain_specifics.h
   hash: 6fc0551b0fa3362678b3d7a227386fafa343140d31e4da3ad4af972e61cd0acb
 - file: ..\src\main.c

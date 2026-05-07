@@ -118,7 +118,9 @@ build/default/debug/_ext/1171490990/interrupts.o: \
  ../src/config/default/peripheral/systick/plib_systick.h \
  ../src/config/default/peripheral/dmac/plib_dmac.h \
  ../src/config/default/peripheral/cmcc/plib_cmcc.h \
- ../src/config/default/peripheral/trng/plib_trng.h
+ ../src/config/default/peripheral/trng/plib_trng.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h
 
 ../src/config/default/device_vectors.h:
 
@@ -361,3 +363,7 @@ build/default/debug/_ext/1171490990/interrupts.o: \
 ../src/config/default/peripheral/cmcc/plib_cmcc.h:
 
 ../src/config/default/peripheral/trng/plib_trng.h:
+
+../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.h:
+
+../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h:

@@ -33,6 +33,10 @@
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h</itemPath>
               </logicalFolder>
+              <logicalFolder name="usart" displayName="usart" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.h</itemPath>
+              </logicalFolder>
             </logicalFolder>
             <logicalFolder name="systick" displayName="systick" projectFiles="true">
               <itemPath>../src/config/default/peripheral/systick/plib_systick.h</itemPath>
@@ -218,6 +222,8 @@
       <itemPath>../src/neopixel.h</itemPath>
       <itemPath>../src/dsun_sensor.h</itemPath>
       <itemPath>../src/lcd_i2c.h</itemPath>
+      <itemPath>../src/actuator.h</itemPath>
+      <itemPath>../src/dcc_stdio.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -227,6 +233,7 @@
                      projectFiles="true">
         <logicalFolder name="components" displayName="components" projectFiles="true">
           <itemPath>CoffinReborn_default/components/core.yml</itemPath>
+          <itemPath>CoffinReborn_default/components/sercom5.yml</itemPath>
           <itemPath>CoffinReborn_default/components/evsys.yml</itemPath>
           <itemPath>CoffinReborn_default/components/dfp.yml</itemPath>
           <itemPath>CoffinReborn_default/components/cmsis.yml</itemPath>
@@ -235,6 +242,7 @@
           <itemPath>CoffinReborn_default/components/FreeRTOS.yml</itemPath>
           <itemPath>CoffinReborn_default/components/nvmctrl.yml</itemPath>
           <itemPath>CoffinReborn_default/components/sercom1.yml</itemPath>
+          <itemPath>CoffinReborn_default/components/stdio.yml</itemPath>
         </logicalFolder>
         <itemPath>CoffinReborn_default/mcc-config.mc4</itemPath>
       </logicalFolder>
@@ -290,6 +298,9 @@
               <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c</itemPath>
               </logicalFolder>
+              <logicalFolder name="usart" displayName="usart" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.c</itemPath>
+              </logicalFolder>
             </logicalFolder>
             <logicalFolder name="systick" displayName="systick" projectFiles="true">
               <itemPath>../src/config/default/peripheral/systick/plib_systick.c</itemPath>
@@ -339,6 +350,8 @@
       <itemPath>../src/neopixel.c</itemPath>
       <itemPath>../src/dsun_sensor.c</itemPath>
       <itemPath>../src/lcd_i2c.c</itemPath>
+      <itemPath>../src/actuator.c</itemPath>
+      <itemPath>../src/dcc_stdio.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -576,7 +589,7 @@
         <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="memories.programmemory.ranges" value="0-fffff"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/andre/Documents/Embedded/Tinker/debug/default/default_ptg"/>
+                  value="C:/Users/andre/Documents/GitHub/Coffin-Reborn/CR-Proj/debug/default/default_ptg"/>
       </nEdbgTool>
     </conf>
   </confs>
