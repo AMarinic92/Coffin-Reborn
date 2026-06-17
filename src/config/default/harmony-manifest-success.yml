@@ -4,12 +4,12 @@
 
 
 project: CoffinReborn
-creation_date: 2026-05-06T19:38:08.655-05:00[America/Chicago]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2026-05-06T22:37:35.444-05:00[America/Chicago]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
 mcc_version: v5.6.4
 mcc_core_version: v5.8.4
-mplabx_version: v6.25        # if MPLAB X plugin only
+mplabx_version: v6.30        # if MPLAB X plugin only
 harmony_version: v5.6.4
 compiler: XC32 4.60
 

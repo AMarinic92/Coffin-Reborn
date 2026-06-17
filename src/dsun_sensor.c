@@ -22,6 +22,7 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
+// ponytail: parked — unused by firmware, kept to be extracted into its own library
 #include "dsun_sensor.h"
 #include "definitions.h"
 

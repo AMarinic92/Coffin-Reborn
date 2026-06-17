@@ -11,6 +11,9 @@
 // Internal State
 static volatile bool is_up = false;
 static volatile bool is_down = false;
+static volatile bool actuator_active = false;  // true while a sequence runs
+
+bool Actuator_IsActive(void) { return actuator_active; }
 
 // Internal Helpers
 static uint32_t interpolateNum(uint32_t min, uint32_t max, uint32_t number);
@@ -147,12 +150,15 @@ void Actuator_Task(void *pvParameters)
 
 
         // 2. Execute sequence (These functions block internally via vTaskDelay)
+        //    Flag the LED task to switch from Fire -> GreenPurple while we move.
+        actuator_active = true;
         switch(act_index) {
             case 0: act_random_drop(); break;
             case 1: act_quick_up();    break;
             case 2: act_violent();     break;
             default: act_reset();      break;
         }
+        actuator_active = false;
 
         // 3. Calculate next event time using the hardware TRNG
         randomNumber = TRNG_ReadData();

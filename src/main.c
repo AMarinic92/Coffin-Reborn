@@ -35,14 +35,21 @@ void Blinky_Task(void *pvParameters)
 void NeoPixel_Task(void *pvParameters)
 {
     uint8_t frame = 0;
-    
+
+    // Start from a known-blank strip
+    NeoPixel_Clear();
+    NeoPixel_Show();
+
     while(1)
     {
-    // Execute the NeoPixel animation
-    NeoPixel_GreenPurple(frame++, 80);
-      
+        // Fire while idle, GreenPurple while the actuator is moving
+        if (Actuator_IsActive())
+            NeoPixel_GreenPurple(frame++, 80);
+        else
+            NeoPixel_Fire(frame++, 80);
+
         // Yield the CPU for 20ms (~50 FPS update rate)
-        vTaskDelay(pdMS_TO_TICKS(20)); 
+        vTaskDelay(pdMS_TO_TICKS(20));
     }
 }
 

@@ -223,7 +223,6 @@
       <itemPath>../src/dsun_sensor.h</itemPath>
       <itemPath>../src/lcd_i2c.h</itemPath>
       <itemPath>../src/actuator.h</itemPath>
-      <itemPath>../src/dcc_stdio.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -351,7 +350,6 @@
       <itemPath>../src/dsun_sensor.c</itemPath>
       <itemPath>../src/lcd_i2c.c</itemPath>
       <itemPath>../src/actuator.c</itemPath>
-      <itemPath>../src/dcc_stdio.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -589,7 +587,7 @@
         <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="memories.programmemory.ranges" value="0-fffff"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/andre/Documents/GitHub/Coffin-Reborn/CR-Proj/debug/default/default_ptg"/>
+                  value="C:/Users/andre/Documents/Embedded/Tinker/debug/default/default_ptg"/>
       </nEdbgTool>
     </conf>
   </confs>

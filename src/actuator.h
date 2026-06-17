@@ -22,5 +22,6 @@
 // Public Function Prototypes
 void Actuator_InitPorts(void);
 void Actuator_Task(void *pvParameters);
+bool Actuator_IsActive(void);   // true while a sequence is running (drives LED effect)
 
 #endif /* ACTUATOR_H */

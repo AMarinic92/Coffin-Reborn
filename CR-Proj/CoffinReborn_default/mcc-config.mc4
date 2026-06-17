@@ -22,7 +22,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\FreeRTOSConfig.h
   hash: ae2fd8177b842b4baace215c45f2f7179362a839127237d6aa93b4600de7acd7
 - file: ..\src\config\default\definitions.h
-  hash: 5c57966d33f67a436e53436e512628d4e558a978e8b825ec3953af95188dbc29
+  hash: 8f8a6c923117fb6d9907c4e8ecd0b637d5f879230b90c64d3336c46070db461e
 - file: ..\src\config\default\device.h
   hash: 2831bdc39f1830b078f223cee62407c27a5ad9a8b7b308c91aeba540a573d123
 - file: ..\src\config\default\device_cache.h
@@ -34,7 +34,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\freertos_hooks.c
   hash: c97b8f92ad60ff513a27ac7a27b3c6824b75005eb8f7b85fe5ae18deaf568c4e
 - file: ..\src\config\default\initialization.c
-  hash: d8446d147d76fd0686436346409598f864f3657dcb6bed2c0e58cedc9bd696da
+  hash: 4e89e1cdf80f79bd3dc21a807d3c5931af7626d57e6228c69f2a8b8a80c94f87
 - file: ..\src\config\default\interrupts.c
   hash: 50902ef00f17aec0e152ec86b83f3df0eff4f7833edcf866cbba1c589d0fcf30
 - file: ..\src\config\default\interrupts.h
