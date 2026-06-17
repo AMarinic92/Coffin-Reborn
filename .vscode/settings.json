@@ -1,0 +1,15 @@
+{
+  "memory-inspector.debugTypes": [
+    "arm-debugger",
+    "embedded-debug",
+    "gdb",
+    "mplab-core-da"
+  ],
+  "mplab.clangd.compileCommandsDir": "${workspaceFolder}\\_build\\CoffinReborn\\default",
+  "mplab.clangd.path": "c:\\Program Files\\Microchip\\xc32\\v4.60\\bin\\xc32-clangd.exe",
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "cmake.sourceDirectory": "C:/Users/andre/Documents/GitHub/Coffin-Reborn/cmake/CoffinReborn/default",
+  "terminal.integrated.env.windows": {
+    "PATH": "C:\\Users\\andre\\AppData\\Local\\Programs\\Python\\Python312\\Scripts;${env:PATH}"
+  }
+}

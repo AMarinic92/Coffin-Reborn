@@ -245,11 +245,6 @@
         </logicalFolder>
         <itemPath>CoffinReborn_default/mcc-config.mc4</itemPath>
       </logicalFolder>
-      <logicalFolder name="FirstProject_default"
-                     displayName="FirstProject_default"
-                     projectFiles="true">
-        <itemPath>FirstProject_default/mcc-config.mc4</itemPath>
-      </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/default/pin_configurations.csv</itemPath>
     </logicalFolder>

@@ -24,10 +24,27 @@ _build/
 *.map
 
 # --- MPLAB X machine-local settings (contain absolute C:\Users\... paths) ---
-nbproject/private/
-nbproject/Makefile-local-*
-nbproject/Package-*.bash
+# **/ so they match under CR-Proj/, not just the repo root.
+**/nbproject/private/
+**/nbproject/Makefile-local-*
+**/nbproject/Package-*.bash
 
 # --- MPLAB trace logs ---
 *.log
 *.log.inx
+
+.generated_files/
+build/
+dist/
+nbproject/
+Makefile*
+Package-*
+private/
+_build/
+!cmake/**/user.cmake
+cmake/**/.generated/*
+cmake/**/CMake*
+out/
+backups/
+
+out/
