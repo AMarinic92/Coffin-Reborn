@@ -11,7 +11,7 @@
             "project": "CoffinReborn",
             "configuration": "default",
             "stopOnEntry": true,
-            "preLaunchTask": "CoffinReborn: default - Build",
+            "preLaunchTask": "MPLAB: Build",
             "program": "${workspaceFolder}/out/CoffinReborn/default.elf"
         }
     ]

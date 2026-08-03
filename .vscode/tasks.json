@@ -1,0 +1,66 @@
+{
+  // Task types are contributed by the Microchip extensions:
+  //   MPLAB-CMake        (microchip.runcmake)      -> fullbuild / cleanbuild / clean
+  //   MPLAB-DebugAdapter (microchip.mplab-core-da) -> program / erase
+  //
+  // "configPath" must point at the .mplab.json project file (NOT the cmake dir) --
+  // runcmake matches a task to an open project by comparing this exact string.
+  //
+  // "action": "fullbuild" (not "build"). Plain "build" is an individual step that
+  // hard-fails if _build/ is missing, and cmake/, _build/ and out/ are all
+  // gitignored -- so "build" cannot work on a fresh clone. "fullbuild" emits +
+  // generates only when needed, then builds incrementally.
+  //
+  // "buildType": "debug" is the only correct value here. "production" builds into a
+  // separate cmake/..default.production + _build/..default.production tree and is
+  // only meaningful for PIC parts that need a debug executive. The SAME51 is a
+  // Cortex-M4 with on-chip debug, so there is exactly one build tree.
+  //
+  // No "problemMatcher" on the CMake tasks on purpose: runcmake attaches
+  // $cmakeGenerate + $cmakeBuildCompiler + $cmakeBuildLinker itself based on
+  // "action". Setting it here -- even to [] -- overrides the extension and
+  // silently kills the Problems panel.
+  //
+  // "group" must be declared: the provider sets it on auto-provided tasks, but
+  // resolveTask() never does, so a hand-written task has no group otherwise.
+  // isDefault:true also makes mplab-core-da pick this task when it injects a
+  // preLaunchTask on F5.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "MPLAB-CMake",
+      "label": "MPLAB: Build",
+      "action": "fullbuild",
+      "buildType": "debug",
+      "configName": "default",
+      "configPath": "${workspaceFolder}/.vscode/CoffinReborn.mplab.json",
+      "group": { "kind": "build", "isDefault": true },
+      "detail": "XC32 build -> out/CoffinReborn/default.elf + default.hex"
+    },
+    {
+      "type": "MPLAB-CMake",
+      "label": "MPLAB: Rebuild",
+      "action": "cleanbuild",
+      "buildType": "debug",
+      "configName": "default",
+      "configPath": "${workspaceFolder}/.vscode/CoffinReborn.mplab.json",
+      "group": "build",
+      "detail": "Clean, re-emit, re-run CMake generate, then build"
+    },
+    {
+      // Image, device, tool and serial all come from CoffinReborn.mplab.json +
+      // CoffinReborn.mplab-local.json. The task's "image"/"tool"/"serial"/"device"/
+      // "properties" keys are either inert or redundant here, so they are omitted.
+      // project+configuration must resolve or the extension pops a file picker.
+      // Programming uses out/CoffinReborn/default.hex (imagePath .elf -> .hex).
+      "type": "MPLAB-DebugAdapter",
+      "label": "MPLAB: Flash",
+      "action": "program",
+      "project": "CoffinReborn",
+      "configuration": "default",
+      "dependsOn": "MPLAB: Build",
+      "problemMatcher": [],
+      "detail": "Build, then program the ATSAME51J20A over PKOB nano"
+    }
+  ]
+}
