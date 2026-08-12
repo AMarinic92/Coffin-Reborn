@@ -6,8 +6,23 @@
 // Your custom packages
 #include "actuator.h"
 #include "fog.h"
-#include "neopixel.h" // Ensure your NeoPixel header is included
 #include <stdio.h>
+
+// Set to 0 to fall back to the original src/neopixel.c driver. Both are
+// compiled; the unused one is dropped by -Wl,--gc-sections.
+#define USE_WS2812_LIB 1
+
+#if USE_WS2812_LIB
+  #include "ws2812/ws2812.h"
+  #include "ws2812/ws2812_fx.h"
+  #include "ws2812/ws2812_freertos.h"
+
+  #define LED_COUNT 144
+  static uint8_t  strip_buf[WS2812_BUF_BYTES(LED_COUNT)];
+  static ws2812_t strip;
+#else
+  #include "neopixel.h"
+#endif
 
 // Define an LED pin for your heartbeat (assuming PA14)
 #define BLINKY_LED_PIN PORT_PA14
@@ -37,16 +52,32 @@ void NeoPixel_Task(void *pvParameters)
     uint8_t frame = 0;
 
     // Start from a known-blank strip
+#if USE_WS2812_LIB
+    ws2812_clear(&strip);
+    ws2812_rtos_show(&strip, 20);
+#else
     NeoPixel_Clear();
     NeoPixel_Show();
+#endif
 
     while(1)
     {
         // Fire while idle, GreenPurple while the actuator is moving
+#if USE_WS2812_LIB
+        if (Actuator_IsActive())
+            ws2812_fx_green_purple(&strip, frame++, 80);
+        else
+            ws2812_fx_fire(&strip, frame++, 80);
+
+        // Effects only stage pixels now - the show call is ours. The RTOS path
+        // blocks on a task notification instead of burning ~4.5ms spinning.
+        ws2812_rtos_show(&strip, 20);
+#else
         if (Actuator_IsActive())
             NeoPixel_GreenPurple(frame++, 80);
         else
             NeoPixel_Fire(frame++, 80);
+#endif
 
         // Yield the CPU for 20ms (~50 FPS update rate)
         vTaskDelay(pdMS_TO_TICKS(20));
@@ -70,7 +101,27 @@ int main(void)
     // 2. Initialize Custom Peripherals
     Actuator_InitPorts();
     Fog_InitPorts();
+
+#if USE_WS2812_LIB
+    ws2812_cfg_t cfg = {
+        .sercom   = SERCOM1_REGS,
+        .dma_ch   = DMAC_CHANNEL_0,
+        .buf      = strip_buf,
+        .buf_len  = sizeof(strip_buf),
+        .num_leds = LED_COUNT,
+        .order    = WS2812_ORDER_GRB,
+        // Tick rate is 1000Hz, so ticks are milliseconds. Without this the
+        // show timeout is not enforced and a stalled DMA would spin forever.
+        .now_ms   = xTaskGetTickCount,
+    };
+    if (!ws2812_init(&strip, &cfg)) {
+        #ifndef NDEBUG
+            printf("ws2812_init FAILED\n");
+        #endif
+    }
+#else
     NeoPixel_Init();
+#endif
 
 #ifndef NDEBUG
     printf("~~~DEBUG ENABLED~~~\n");

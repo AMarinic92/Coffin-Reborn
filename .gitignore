@@ -14,7 +14,11 @@
 build/
 dist/
 debug/
-cmake/
+# "cmake/" would make the !cmake/**/user.cmake rule below unreachable -- git
+# cannot re-include a file whose parent directory is excluded. Exclude the
+# files but keep descending into the directories.
+cmake/**
+!cmake/**/
 _build/
 .generated_files/
 *.o
