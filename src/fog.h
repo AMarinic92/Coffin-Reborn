@@ -5,9 +5,11 @@
 // "on" switch - if the heater is below temperature the machine ignores it, so
 // the relay can never force a burst, only permit one.
 
+#include "timing.h"
+
 // Default cycle: fog on for FOG_ON_MS out of every FOG_PERIOD_MS.
-#define FOG_ON_MS      (5UL * 1000UL)
-#define FOG_PERIOD_MS  (180UL * 1000UL)
+#define FOG_ON_MS      (5UL * MS_PER_SECOND)
+#define FOG_PERIOD_MS  (180UL * MS_PER_SECOND)
 
 void Fog_InitPorts(void);
 void Fog_Task(void *pvParameters);

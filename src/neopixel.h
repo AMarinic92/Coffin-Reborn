@@ -7,11 +7,11 @@
  * ---------------
  * Each NeoPixel bit is encoded as 3 SPI bits at 2.4 MHz (416.7 ns/bit):
  *
- *   NeoPixel '1' ? SPI 1-1-0  ?  T1H = 833 ns  T1L = 417 ns   ? (spec 800±150 / 450±150)
- *   NeoPixel '0' ? SPI 1-0-0  ?  T0H = 417 ns  T0L = 833 ns   ? (spec 400±150 / 850±150)
+ *   NeoPixel '1' ? SPI 1-1-0  ?  T1H = 833 ns  T1L = 417 ns   ? (spec 800ï¿½150 / 450ï¿½150)
+ *   NeoPixel '0' ? SPI 1-0-0  ?  T0H = 417 ns  T0L = 833 ns   ? (spec 400ï¿½150 / 850ï¿½150)
  *
  * 24 NeoPixel bits (1 LED, GRB order) ? 72 SPI bits ? 9 SPI bytes
- * Buffer tail: RESET_BYTES × 0x00 ? keeps MOSI low ? 167 µs  (> 50 µs reset minimum)
+ * Buffer tail: RESET_BYTES ï¿½ 0x00 ? keeps MOSI low ? 167 ï¿½s  (> 50 ï¿½s reset minimum)
  *
  * HARDWARE CONNECTIONS
  * --------------------
@@ -35,7 +35,7 @@
 #define DMAC_CHANNEL_NEO    DMAC_CHANNEL_0  /* must match MCC DMAC assignment   */
 
 /* ?? Derived constants ? do not edit ???????????????????????????????????????? */
-#define NEO_RESET_BYTES     50u         /* 50 × 8 × 416.7 ns ? 167 µs ? 50 µs */
+#define NEO_RESET_BYTES     50u         /* 50 ï¿½ 8 ï¿½ 416.7 ns ? 167 ï¿½s ? 50 ï¿½s */
 #define NEO_DATA_BYTES      ((uint16_t)(NUM_LEDS) * 9u)
 #define NEO_BUF_SIZE        (NEO_DATA_BYTES + NEO_RESET_BYTES)
 
