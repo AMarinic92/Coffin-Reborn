@@ -5522,7 +5522,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '0x0'
+            value: '0x2000'
           type: Dynamic
         type: Values
       type: String
@@ -5533,7 +5533,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ''
+            value: High
           type: User
         type: Values
       type: String

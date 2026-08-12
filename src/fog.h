@@ -8,8 +8,8 @@
 #include "timing.h"
 
 // Default cycle: fog on for FOG_ON_MS out of every FOG_PERIOD_MS.
-#define FOG_ON_MS      (5UL * MS_PER_SECOND)
-#define FOG_PERIOD_MS  (180UL * MS_PER_SECOND)
+#define FOG_ON_MS      (10UL * MS_PER_SECOND)
+#define FOG_PERIOD_MS  (20UL * MS_PER_SECOND)
 
 void Fog_InitPorts(void);
 void Fog_Task(void *pvParameters);

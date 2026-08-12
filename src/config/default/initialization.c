@@ -172,9 +172,9 @@ void SYS_Initialize ( void* data )
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
-    SERCOM5_USART_Initialize();
-
 	TRNG_Initialize();
+
+    SERCOM5_USART_Initialize();
 
 
     NVIC_Initialize();

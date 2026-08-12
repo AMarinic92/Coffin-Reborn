@@ -191,61 +191,225 @@
         {
             "name": "Project files",
             "files": [
-                "CR-Proj/Makefile",
-                "CR-Proj/CoffinReborn_default/mcc-config.mc4",
-                "src/*",
-                "src/config/default/peripheral/clock/*",
-                "src/config/default/peripheral/cmcc/*",
-                "src/config/default/peripheral/dmac/*",
-                "src/config/default/peripheral/evsys/*",
-                "src/config/default/peripheral/nvic/*",
-                "src/config/default/peripheral/nvmctrl/*",
-                "src/config/default/peripheral/port/*",
-                "src/config/default/peripheral/sercom/spi_master/*",
-                "src/config/default/peripheral/sercom/usart/*",
-                "src/config/default/peripheral/systick/*",
-                "src/config/default/peripheral/tcc/*",
-                "src/config/default/peripheral/trng/*",
-                "src/packs/ATSAME51J20A_DFP/**/*",
-                "src/packs/CMSIS/CMSIS/Core/Include/*",
-                "src/third_party/rtos/FreeRTOS/Source/include/*",
-                "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/*",
-                "src/config/default/stdio/*",
-                "src/third_party/rtos/FreeRTOS/Source/*",
-                "src/third_party/rtos/FreeRTOS/Source/portable/MemMang/*",
-                "CR-Proj/CoffinReborn_default/**/*",
-                "src/config/default/*{.c,.csv,.h,.ld}",
-                "src/config/default/peripheral/nvmctrl/plib_nvmctrl.c",
-                "src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c",
-                "src/config/default/peripheral/evsys/plib_evsys.c",
-                "src/main.c",
-                "src/config/default/initialization.c",
-                "src/config/default/interrupts.c",
-                "src/config/default/exceptions.c",
-                "src/config/default/ATSAME51J20A.ld",
-                "src/config/default/stdio/xc32_monitor.c",
-                "src/config/default/peripheral/port/plib_port.c",
-                "src/config/default/peripheral/clock/plib_clock.c",
-                "src/config/default/peripheral/nvic/plib_nvic.c",
-                "src/config/default/peripheral/systick/plib_systick.c",
-                "src/config/default/peripheral/dmac/plib_dmac.c",
-                "src/config/default/peripheral/cmcc/plib_cmcc.c",
-                "src/config/default/startup_xc32.c",
-                "src/config/default/libc_syscalls.c",
-                "src/config/default/peripheral/sercom/usart/plib_sercom5_usart.c",
-                "src/config/default/peripheral/trng/plib_trng.c",
-                "src/config/default/freertos_hooks.c",
-                "src/third_party/rtos/FreeRTOS/Source/croutine.c",
-                "src/third_party/rtos/FreeRTOS/Source/list.c",
-                "src/third_party/rtos/FreeRTOS/Source/queue.c",
-                "src/third_party/rtos/FreeRTOS/Source/FreeRTOS_tasks.c",
-                "src/third_party/rtos/FreeRTOS/Source/timers.c",
-                "src/third_party/rtos/FreeRTOS/Source/event_groups.c",
-                "src/third_party/rtos/FreeRTOS/Source/stream_buffer.c",
-                "src/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c",
-                "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/port.c"
-            ],
-            "encoding": "ISO-8859-1"
+                {
+                    "include": "CR-Proj/Makefile",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "CR-Proj/CoffinReborn_default/mcc-config.mc4",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/clock/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/cmcc/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/dmac/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/evsys/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/nvic/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/nvmctrl/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/port/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/sercom/spi_master/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/sercom/usart/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/systick/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/tcc/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/trng/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/packs/ATSAME51J20A_DFP/**/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/packs/CMSIS/CMSIS/Core/Include/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/include/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/stdio/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/portable/MemMang/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "CR-Proj/CoffinReborn_default/**/*",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/*{.c,.csv,.h,.ld}",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/nvmctrl/plib_nvmctrl.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/evsys/plib_evsys.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/main.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/initialization.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/interrupts.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/exceptions.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/ATSAME51J20A.ld",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/stdio/xc32_monitor.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/port/plib_port.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/clock/plib_clock.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/nvic/plib_nvic.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/systick/plib_systick.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/dmac/plib_dmac.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/cmcc/plib_cmcc.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/startup_xc32.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/libc_syscalls.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/sercom/usart/plib_sercom5_usart.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/peripheral/trng/plib_trng.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/config/default/freertos_hooks.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/croutine.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/list.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/queue.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/FreeRTOS_tasks.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/timers.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/event_groups.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/stream_buffer.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c",
+                    "encoding": "ISO-8859-1"
+                },
+                {
+                    "include": "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/port.c",
+                    "encoding": "ISO-8859-1"
+                },
+                "lib/ws2812-spi/include/ws2812/ws2812_fx.h",
+                "lib/ws2812-spi/include/ws2812/ws2812_freertos.h",
+                "lib/ws2812-spi/include/ws2812/ws2812.h",
+                "lib/ws2812-spi/src/ws2812.c",
+                "lib/ws2812-spi/src/ws2812_freertos.c",
+                "lib/ws2812-spi/src/ws2812_fx.c"
+            ]
         }
     ]
 }

@@ -13,16 +13,17 @@
 // ponytail: single deadline word instead of task notifications / timers.
 static volatile TickType_t fog_off_at;
 
-// One place to flip if the relay board turns out to be active-low.
+// Active low: IN sinks the optocoupler LED, so a low pin closes NO-COM.
+// Driving high (LED dark) is the off state. Do not "simplify" this.
 static void fog_relay(bool on)
 {
-    if (on) { FOG_RELAY_Set(); } else { FOG_RELAY_Clear(); }
+    if (on) { FOG_RELAY_Clear(); } else { FOG_RELAY_Set(); }
 }
 
 void Fog_InitPorts(void)
 {
-    FOG_RELAY_Clear();          // start off, then drive the pin
-    FOG_RELAY_OutputEnable();   // Harmony leaves PB13 as an input
+    FOG_RELAY_Set();            // preset the latch high (off) before driving
+    FOG_RELAY_OutputEnable();
 }
 
 void Fog_Trigger(void)

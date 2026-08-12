@@ -58,8 +58,8 @@
 #include "peripheral/systick/plib_systick.h"
 #include "peripheral/dmac/plib_dmac.h"
 #include "peripheral/cmcc/plib_cmcc.h"
-#include "peripheral/sercom/usart/plib_sercom5_usart.h"
 #include "peripheral/trng/plib_trng.h"
+#include "peripheral/sercom/usart/plib_sercom5_usart.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

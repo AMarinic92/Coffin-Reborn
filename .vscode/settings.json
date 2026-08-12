@@ -18,5 +18,8 @@
   "terminal.integrated.env.windows": {
     "PATH": "C:\\Users\\andre\\AppData\\Local\\Programs\\Python\\Python312\\Scripts;${env:PATH}"
   },
-  "mplab.clangd.arguments": ["--header-insertion=never"]
+  "mplab.clangd.arguments": [
+    "--header-insertion=never"
+  ],
+  "mplab.project.workspace.addNewSourceFiles": "Always"
 }

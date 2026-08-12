@@ -20,7 +20,7 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 23,PB10,,Available,,,,,,NORMAL
 24,PB11,,Available,,,,,,NORMAL
 25,PB12,,Available,,,,,,NORMAL
-26,PB13,FOG_RELAY,GPIO,Digital,Out,Low,,,NORMAL
+26,PB13,FOG_RELAY,GPIO,Digital,Out,High,,,NORMAL
 27,PB14,,Available,,,,,,NORMAL
 28,PB15,,Available,,,,,,NORMAL
 29,PA12,,Available,,,,,,NORMAL
