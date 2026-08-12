@@ -65,23 +65,14 @@
 // *****************************************************************************
 // *****************************************************************************
 
-/*** Macros for PRelayIN pin ***/
-#define PRelayIN_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 6U))
-#define PRelayIN_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 6U))
-#define PRelayIN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 6U))
-#define PRelayIN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 6U))
-#define PRelayIN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 6U))
-#define PRelayIN_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 6U)) & 0x01U)
-#define PRelayIN_PIN                  PORT_PIN_PB06
-
-/*** Macros for PRelayOUT pin ***/
-#define PRelayOUT_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 7U))
-#define PRelayOUT_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 7U))
-#define PRelayOUT_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 7U))
-#define PRelayOUT_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 7U))
-#define PRelayOUT_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 7U))
-#define PRelayOUT_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 7U)) & 0x01U)
-#define PRelayOUT_PIN                  PORT_PIN_PB07
+/*** Macros for FOG_RELAY pin ***/
+#define FOG_RELAY_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 13U))
+#define FOG_RELAY_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 13U))
+#define FOG_RELAY_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 13U))
+#define FOG_RELAY_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 13U))
+#define FOG_RELAY_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 13U))
+#define FOG_RELAY_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 13U)) & 0x01U)
+#define FOG_RELAY_PIN                  PORT_PIN_PB13
 
 /*** Macros for onboard_LED pin ***/
 #define onboard_LED_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 14U))
@@ -99,15 +90,6 @@
 /*** Macros for NeoPixelSPICLK pin ***/
 #define NeoPixelSPICLK_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 17U)) & 0x01U)
 #define NeoPixelSPICLK_PIN                  PORT_PIN_PA17
-
-/*** Macros for SUND pin ***/
-#define SUND_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 19U))
-#define SUND_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 19U))
-#define SUND_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 19U))
-#define SUND_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 19U))
-#define SUND_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 19U))
-#define SUND_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 19U)) & 0x01U)
-#define SUND_PIN                  PORT_PIN_PA19
 
 /*** Macros for usb_debugging_tx pin ***/
 #define usb_debugging_tx_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 16U)) & 0x01U)

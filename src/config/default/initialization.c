@@ -169,14 +169,12 @@ void SYS_Initialize ( void* data )
 
     EVSYS_Initialize();
 
-    TCC0_PWMInitialize();
-
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
-	TRNG_Initialize();
-
     SERCOM5_USART_Initialize();
+
+	TRNG_Initialize();
 
 
     NVIC_Initialize();

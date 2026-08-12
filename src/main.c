@@ -5,9 +5,9 @@
 
 // Your custom packages
 #include "actuator.h"
+#include "fog.h"
 #include "neopixel.h" // Ensure your NeoPixel header is included
 #include <stdio.h>
-#define DEBUG_WAIT 10000000UL
 
 // Define an LED pin for your heartbeat (assuming PA14)
 #define BLINKY_LED_PIN PORT_PA14
@@ -69,6 +69,7 @@ int main(void)
     
     // 2. Initialize Custom Peripherals
     Actuator_InitPorts();
+    Fog_InitPorts();
     NeoPixel_Init();
 
 #ifndef NDEBUG
@@ -88,8 +89,6 @@ int main(void)
     );
 
     // Medium priority logic controller
-    // Currently appears bugged as this will break blinky 
- 
     xTaskCreate(
         Actuator_Task,            // Implemented in actuator.c
         "Actuator",               
@@ -97,6 +96,16 @@ int main(void)
         NULL,                     
         2,                        
         NULL                      
+    );
+
+    // Low priority fog cycle (also woken indirectly by Actuator via Fog_Trigger)
+    xTaskCreate(
+        Fog_Task,
+        "Fog",
+        256,                      // only needs the debug printf
+        NULL,
+        1,
+        NULL
     );
 
     // High priority visual updates (Keeps animations smooth)

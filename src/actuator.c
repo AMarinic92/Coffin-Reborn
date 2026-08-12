@@ -1,12 +1,10 @@
 #include "actuator.h"
+#include "fog.h"
 #include <sam.h>
 #include "FreeRTOS.h"
 #include "definitions.h"
 #include "task.h"
 #include <stdio.h>
-// If you completely removed the dcc_stdio from your build, remove this include.
-// Otherwise, keep it for your debug prints.
-// #include "dcc_stdio.h" 
 
 // Internal State
 static volatile bool is_up = false;
@@ -152,6 +150,7 @@ void Actuator_Task(void *pvParameters)
         // 2. Execute sequence (These functions block internally via vTaskDelay)
         //    Flag the LED task to switch from Fire -> GreenPurple while we move.
         actuator_active = true;
+        Fog_Trigger();   // fog covers the sequence; extends a burst already running
         switch(act_index) {
             case 0: act_random_drop(); break;
             case 1: act_quick_up();    break;

@@ -2,7 +2,7 @@
     "configurations": [
         {
             "reference": "default",
-            "toolSerial": "MCHP3360011800004442"
+            "toolSerial": "MCHP3360011800004300"
         }
     ]
 }

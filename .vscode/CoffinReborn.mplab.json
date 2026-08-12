@@ -54,7 +54,16 @@
                 "compiler.enable-unroll-loops": false,
                 "compiler.exclude-floating-point": false,
                 "compiler.expand-pragma-config": false,
-                "compiler.extra-include-directories": "src;src/config/default;src/packs/ATSAME51J20A_DFP;src/packs/CMSIS;src/packs/CMSIS/CMSIS/Core/Include;src/third_party/rtos/FreeRTOS/Source/include;src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F;CR-Proj",
+                "compiler.extra-include-directories": [
+                    "CR-Proj",
+                    "src",
+                    "src/config/default",
+                    "src/packs/ATSAME51J20A_DFP",
+                    "src/packs/CMSIS",
+                    "src/packs/CMSIS/CMSIS/Core/Include",
+                    "src/third_party/rtos/FreeRTOS/Source/include",
+                    "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F"
+                ],
                 "compiler.generate-16-bit-code": false,
                 "compiler.generate-micro-compressed-code": false,
                 "compiler.isolate-each-function": true,
@@ -86,7 +95,16 @@
                 "compiler++.enable-unroll-loops": false,
                 "compiler++.exceptions": true,
                 "compiler++.exclude-floating-point": false,
-                "compiler++.extra-include-directories": "src;src/config/default;src/packs/ATSAME51J20A_DFP;src/packs/CMSIS;src/packs/CMSIS/CMSIS/Core/Include;src/third_party/rtos/FreeRTOS/Source/include;src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F;CR-Proj",
+                "compiler++.extra-include-directories": [
+                    "CR-Proj",
+                    "src",
+                    "src/config/default",
+                    "src/packs/ATSAME51J20A_DFP",
+                    "src/packs/CMSIS",
+                    "src/packs/CMSIS/CMSIS/Core/Include",
+                    "src/third_party/rtos/FreeRTOS/Source/include",
+                    "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F"
+                ],
                 "compiler++.generate-16-bit-code": false,
                 "compiler++.generate-micro-compressed-code": false,
                 "compiler++.isolate-each-function": true,
@@ -155,7 +173,8 @@
                 "global.preserve-all": false,
                 "global.relaxed-math": false,
                 "global.save-temps": false,
-                "global.wpo-lto": false
+                "global.wpo-lto": false,
+                "C32Global.mstacktcm": "false"
             }
         },
         {
@@ -195,7 +214,36 @@
                 "src/third_party/rtos/FreeRTOS/Source/*",
                 "src/third_party/rtos/FreeRTOS/Source/portable/MemMang/*",
                 "CR-Proj/CoffinReborn_default/**/*",
-                "src/config/default/*{.c,.csv,.h,.ld}"
+                "src/config/default/*{.c,.csv,.h,.ld}",
+                "src/config/default/peripheral/nvmctrl/plib_nvmctrl.c",
+                "src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.c",
+                "src/config/default/peripheral/evsys/plib_evsys.c",
+                "src/main.c",
+                "src/config/default/initialization.c",
+                "src/config/default/interrupts.c",
+                "src/config/default/exceptions.c",
+                "src/config/default/ATSAME51J20A.ld",
+                "src/config/default/stdio/xc32_monitor.c",
+                "src/config/default/peripheral/port/plib_port.c",
+                "src/config/default/peripheral/clock/plib_clock.c",
+                "src/config/default/peripheral/nvic/plib_nvic.c",
+                "src/config/default/peripheral/systick/plib_systick.c",
+                "src/config/default/peripheral/dmac/plib_dmac.c",
+                "src/config/default/peripheral/cmcc/plib_cmcc.c",
+                "src/config/default/startup_xc32.c",
+                "src/config/default/libc_syscalls.c",
+                "src/config/default/peripheral/sercom/usart/plib_sercom5_usart.c",
+                "src/config/default/peripheral/trng/plib_trng.c",
+                "src/config/default/freertos_hooks.c",
+                "src/third_party/rtos/FreeRTOS/Source/croutine.c",
+                "src/third_party/rtos/FreeRTOS/Source/list.c",
+                "src/third_party/rtos/FreeRTOS/Source/queue.c",
+                "src/third_party/rtos/FreeRTOS/Source/FreeRTOS_tasks.c",
+                "src/third_party/rtos/FreeRTOS/Source/timers.c",
+                "src/third_party/rtos/FreeRTOS/Source/event_groups.c",
+                "src/third_party/rtos/FreeRTOS/Source/stream_buffer.c",
+                "src/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c",
+                "src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/ARM_CM4F/port.c"
             ],
             "encoding": "ISO-8859-1"
         }
