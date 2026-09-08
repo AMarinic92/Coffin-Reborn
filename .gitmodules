@@ -1,3 +1,7 @@
 [submodule "lib/ws2812-spi"]
 	path = lib/ws2812-spi
 	url = https://github.com/AMarinic92/ws2812-spi.git
+[submodule "lib/dy_sound_same51"]
+	path = lib/dy_sound_same51
+	url = https://github.com/AMarinic92/dy_sound_same51.git
+	branch = primer
