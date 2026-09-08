@@ -117,6 +117,14 @@
 #define RELAY_2_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 21U)) & 0x01U)
 #define RELAY_2_PIN                  PORT_PIN_PA21
 
+/*** Macros for SOUND_TX pin ***/
+#define SOUND_TX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 22U)) & 0x01U)
+#define SOUND_TX_PIN                  PORT_PIN_PA22
+
+/*** Macros for SOUND_RX pin ***/
+#define SOUND_RX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 23U)) & 0x01U)
+#define SOUND_RX_PIN                  PORT_PIN_PA23
+
 // *****************************************************************************
 /* PORT Group
 

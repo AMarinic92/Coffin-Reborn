@@ -6,6 +6,7 @@
 // Your custom packages
 #include "actuator.h"
 #include "fog.h"
+#include "sound.h"
 #include <stdio.h>
 
 // Set to 0 to fall back to the original src/neopixel.c driver. Both are
@@ -102,6 +103,11 @@ int main(void)
     Actuator_InitPorts();
     Fog_InitPorts();
 
+    // Binds the DY module to its SERCOM and creates the sound task. Must run
+    // before the scheduler starts. Does nothing if the driver submodule has
+    // not been populated yet.
+    Sound_Init();
+
 #if USE_WS2812_LIB
     ws2812_cfg_t cfg = {
         .sercom   = SERCOM1_REGS,
@@ -161,12 +167,24 @@ int main(void)
 
     // High priority visual updates (Keeps animations smooth)
     xTaskCreate(
-        NeoPixel_Task,            
-        "NeoPixel",               
+        NeoPixel_Task,
+        "NeoPixel",
         512,                      // Increased stack for NeoPixel array buffering
-        NULL,                     
-        3,                        
-        NULL                      
+        NULL,
+        3,
+        NULL
+    );
+
+    // Walks the pirate card one track at a time so they can be identified by
+    // ear. Only prints and posts cues - the sound task created by Sound_Init()
+    // is what actually talks to the module.
+    xTaskCreate(
+        SoundWalk_Task,
+        "SoundWalk",
+        512,                      // printf per track
+        NULL,
+        1,
+        NULL
     );
 
     // 4. Hand control to the FreeRTOS Scheduler

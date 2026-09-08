@@ -165,6 +165,8 @@ void SYS_Initialize ( void* data )
 
 
 
+    SERCOM3_USART_Initialize();
+
     SERCOM1_SPI_Initialize();
 
     EVSYS_Initialize();
@@ -172,9 +174,9 @@ void SYS_Initialize ( void* data )
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
-	TRNG_Initialize();
-
     SERCOM5_USART_Initialize();
+
+	TRNG_Initialize();
 
 
     NVIC_Initialize();

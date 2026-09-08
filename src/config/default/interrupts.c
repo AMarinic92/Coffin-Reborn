@@ -78,7 +78,7 @@ void __attribute__((optimize("-O1"), long_call, noreturn, used))Dummy_Handler(vo
 }
 
 /* MISRAC 2023 deviation block start */
-/* MISRA C-2023 Rule 8.6 deviated 123 times.  Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
+/* MISRA C-2023 Rule 8.6 deviated 119 times.  Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
 /* Device vectors list dummy definition*/
 extern void vPortSVCHandler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void xPortPendSVHandler         ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -136,10 +136,6 @@ extern void SERCOM2_0_Handler          ( void ) __attribute__((weak, alias("Dumm
 extern void SERCOM2_1_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM2_2_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM2_OTHER_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM3_0_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM3_1_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM3_2_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM3_OTHER_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM4_0_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM4_1_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM4_2_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -212,7 +208,7 @@ extern void SDHC0_Handler              ( void ) __attribute__((weak, alias("Dumm
 
 
 /* MISRAC 2023 deviation block start */
-/* MISRA C-2023 Rule 2.8 deviated 123 times.  Deviation record ID -  H3_MISRAC_2023_R_2_8_DR_1 */
+/* MISRA C-2023 Rule 2.8 deviated 119 times.  Deviation record ID -  H3_MISRAC_2023_R_2_8_DR_1 */
 
 __attribute__ ((section(".vectors"), used))
 const H3DeviceVectors exception_table=
@@ -285,10 +281,10 @@ const H3DeviceVectors exception_table=
     .pfnSERCOM2_1_Handler          = SERCOM2_1_Handler,
     .pfnSERCOM2_2_Handler          = SERCOM2_2_Handler,
     .pfnSERCOM2_OTHER_Handler      = SERCOM2_OTHER_Handler,
-    .pfnSERCOM3_0_Handler          = SERCOM3_0_Handler,
-    .pfnSERCOM3_1_Handler          = SERCOM3_1_Handler,
-    .pfnSERCOM3_2_Handler          = SERCOM3_2_Handler,
-    .pfnSERCOM3_OTHER_Handler      = SERCOM3_OTHER_Handler,
+    .pfnSERCOM3_0_Handler          = SERCOM3_USART_InterruptHandler,
+    .pfnSERCOM3_1_Handler          = SERCOM3_USART_InterruptHandler,
+    .pfnSERCOM3_2_Handler          = SERCOM3_USART_InterruptHandler,
+    .pfnSERCOM3_OTHER_Handler      = SERCOM3_USART_InterruptHandler,
     .pfnSERCOM4_0_Handler          = SERCOM4_0_Handler,
     .pfnSERCOM4_1_Handler          = SERCOM4_1_Handler,
     .pfnSERCOM4_2_Handler          = SERCOM4_2_Handler,

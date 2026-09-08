@@ -35,8 +35,8 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 40,PB17,usb_debugging_rx,SERCOM5_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
 41,PA20,RELAY_1,GPIO,Digital,Out,Low,,,NORMAL
 42,PA21,RELAY_2,GPIO,Digital,Out,Low,,,NORMAL
-43,PA22,,Available,,,,,,NORMAL
-44,PA23,,Available,,,,,,NORMAL
+43,PA22,SOUND_TX,SERCOM3_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
+44,PA23,SOUND_RX,SERCOM3_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
 45,PA24,,Available,,,,,,NORMAL
 46,PA25,,Available,,,,,,NORMAL
 49,PB22,,Available,,,,,,NORMAL

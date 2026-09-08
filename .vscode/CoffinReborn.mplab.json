@@ -408,7 +408,14 @@
                 "lib/ws2812-spi/include/ws2812/ws2812.h",
                 "lib/ws2812-spi/src/ws2812.c",
                 "lib/ws2812-spi/src/ws2812_freertos.c",
-                "lib/ws2812-spi/src/ws2812_fx.c"
+                "lib/ws2812-spi/src/ws2812_fx.c",
+                "lib/dy_sound_same51/include/dy_sound/dy_sound_freertos.h",
+                "lib/dy_sound_same51/include/dy_sound/dy_sound_bank.h",
+                "lib/dy_sound_same51/include/dy_sound/dy_sound.h",
+                "lib/dy_sound_same51/src/dy_sound_freertos.c",
+                "lib/dy_sound_same51/src/dy_sound_bank.c",
+                "lib/dy_sound_same51/src/dy_sound.c",
+                "src/config/default/peripheral/sercom/usart/plib_sercom3_usart.c"
             ]
         }
     ]

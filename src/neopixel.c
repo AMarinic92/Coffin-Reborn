@@ -31,7 +31,7 @@ static void NeoPixel_DMA_Callback(DMAC_TRANSFER_EVENT event, uintptr_t context)
  *   pixel '1'  ?  1 1 0  (0x6)
  *   pixel '0'  ?  1 0 0  (0x4)
  *
- * 8 pixel bits × 3 SPI bits = 24 SPI bits = 3 bytes, packed MSB-first.
+ * 8 pixel bits ï¿½ 3 SPI bits = 24 SPI bits = 3 bytes, packed MSB-first.
  *
  * Example: pixel byte 0xC0 = 1100 0000
  *   bit7=1 ? 110 | bit6=1 ? 110 | bit5=0 ? 100 | bit4=0 ? 100 | ?
@@ -179,8 +179,9 @@ void NeoPixel_Fire(uint8_t offset, uint8_t brightness)
         uint16_t xi = x >> 8;      // integer part
         uint16_t xf = x & 0xFF;    // fractional part
 
-        // Smoothstep (proper easing curve)
-        uint16_t t = (uint16_t)xf * xf * (65535u - (xf << 1)) >> 16;
+        // Smoothstep t^2*(3-2t). xf is 0..255 standing in for 0..1, so the
+        // "3" is 768 in that scale. Result spans 0..65535 for lerp8by16.
+        uint16_t t = (uint16_t)(((uint32_t)xf * xf * (768u - (xf << 1))) >> 8);
 
         uint8_t n0 = hash8(xi);
         uint8_t n1 = hash8(xi + 1);
