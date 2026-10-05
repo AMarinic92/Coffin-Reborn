@@ -230,6 +230,11 @@ bool Sound_Play(uint16_t id)
     return dy_sound_bank_play(&s_module, id);
 }
 
+bool Sound_PlayNow(uint16_t id)
+{
+    return dy_sound_bank_play_nowait(&s_module, id);
+}
+
 bool Sound_Select(uint16_t id)
 {
     return dy_sound_bank_select(&s_module, id);
@@ -238,6 +243,51 @@ bool Sound_Select(uint16_t id)
 bool Sound_ModuleIsTalking(void)
 {
     return s_talking;
+}
+
+// ---------------------------------------------------------------------------
+// What is playing.
+//
+// Both queries are asked, not just the track: a BUSY edge wants to know whether
+// the module is playing AND what, and the two live in different commands (0x01
+// and 0x0D). Together they cost the sound task up to 240 ms of reply window on
+// a module that stays silent - which is time the sound task has and the handler
+// does not, and the whole reason this goes through a flag.
+// ---------------------------------------------------------------------------
+
+void Sound_AskFromISR(void)
+{
+    // NULL for the woken flag: this handler does nothing else, so the driver
+    // performs the yield itself. Pass a real flag instead if the handler grows
+    // other FreeRTOS calls to fold into one yield.
+    (void)dy_sound_rtos_ask_from_isr(&s_module, DY_ASK_BOTH, NULL);
+}
+
+bool Sound_Ask(void)
+{
+    return dy_sound_rtos_ask(&s_module, DY_ASK_BOTH);
+}
+
+int Sound_PlayingTrack(void)
+{
+    dy_status_t snap;
+
+    // The return value is about whether the fields came from one query. Reading
+    // a single field, it does not matter - so this ignores it deliberately.
+    (void)dy_sound_status(&s_module, &snap);
+
+    return (int)snap.track;
+}
+
+bool Sound_IsPlaying(void)
+{
+    dy_status_t snap;
+
+    (void)dy_sound_status(&s_module, &snap);
+
+    // snap.playing is already status == PLAYING, so an unanswered query reads
+    // false rather than "probably". Nothing is inferred from silence.
+    return snap.playing;
 }
 
 // ---------------------------------------------------------------------------
@@ -332,7 +382,12 @@ void SoundWalk_Task(void *pvParameters)
 }
 
 bool Sound_Play(uint16_t id)          { (void)id; return false; }
+bool Sound_PlayNow(uint16_t id)       { (void)id; return false; }
 bool Sound_Select(uint16_t id)        { (void)id; return false; }
 bool Sound_ModuleIsTalking(void)      { return false; }
+void Sound_AskFromISR(void)           { }
+bool Sound_Ask(void)                  { return false; }
+int  Sound_PlayingTrack(void)         { return -1; }
+bool Sound_IsPlaying(void)            { return false; }
 
 #endif /* DY_SOUND_AVAILABLE */

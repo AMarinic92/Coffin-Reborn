@@ -100,6 +100,16 @@ void SoundWalk_Task(void *pvParameters);
 // Play a cue now, whether or not it is already selected. Any task, never blocks.
 bool Sound_Play(uint16_t id);
 
+// The same cue, fire and forget. Neither the caller NOR the sound task waits on
+// anything: one frame goes out and the task is free again, ~6 ms instead of the
+// ~210-320 ms a confirmed cue occupies it for.
+//
+// Use it when nobody is going to look at the answer - a stinger during a burst
+// of cues, or anything at all while the module's TX line is unwired. The cost
+// is that Sound_PlayingTrack() reads -1 afterwards until something asks, which
+// is the honest answer: nothing did.
+bool Sound_PlayNow(uint16_t id);
+
 // Say what the room's sound should be. Plays only on a change, so this is safe
 // to call every pass of a loop - no LastSoundVariable needed.
 bool Sound_Select(uint16_t id);
@@ -108,5 +118,46 @@ bool Sound_Select(uint16_t id);
 // with its TX unwired plays perfectly and never sets this, so do not gate
 // anything on it - it is for the console line only.
 bool Sound_ModuleIsTalking(void);
+
+// ---------------------------------------------------------------------------
+// Asking what is playing
+//
+// The module has a BUSY pin, and it answers a different question from the UART:
+// the pin says THAT something is playing, the UART says WHAT. Neither is much
+// use alone, which is why these two go together.
+//
+// A query takes up to 120 ms and drives a UART owned by the sound task, so it
+// cannot happen in an interrupt. The interrupt raises a flag instead, the sound
+// task spends it, and the answer waits in a snapshot until someone reads it:
+//
+//     void BUSY_EdgeHandler(uintptr_t ctx)   // wire to the EIC callback
+//     {
+//         (void)ctx;
+//         Sound_AskFromISR();
+//     }
+//
+//     // anywhere, later
+//     if (Sound_IsPlaying()) { int t = Sound_PlayingTrack(); ... }
+//
+// Nothing here blocks and nothing here transmits. Repeated edges on a bouncing
+// line coalesce into one query.
+// ---------------------------------------------------------------------------
+
+// Raise a what-is-playing request from an interrupt handler and wake the sound
+// task to serve it. Safe from any ISR below configMAX_SYSCALL_INTERRUPT_PRIORITY.
+void Sound_AskFromISR(void);
+
+// The same request from a task. Returns false if the sound task is not running.
+bool Sound_Ask(void);
+
+// The track the module last said it was playing, or -1 for "nobody has asked
+// since the last cue, or it did not answer". NOT the commanded track: report
+// that from your own state, because a module that went quiet must not make the
+// room's status read as zero.
+int Sound_PlayingTrack(void);
+
+// True only if the module has actually said so. A module that has never
+// answered reads false, so this is a positive signal and never a gate.
+bool Sound_IsPlaying(void);
 
 #endif /* SOUND_H */

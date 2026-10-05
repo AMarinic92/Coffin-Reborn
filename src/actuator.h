@@ -16,6 +16,8 @@
 #define MAX_DROP_MS   (MS_PER_SECOND * 15UL)
 #define MIN_DROP_MS   (MS_PER_SECOND * 5UL)
 #define SLAM_MAX      5UL
+#define MS_RESET_DOWN (MS_PER_SECOND * 3UL)  // must exceed full stroke time, with margin for low air pressure
+#define MS_REVERSE_PAUSE 100UL               // let the relay and valve coil release before energizing the other side
 
 // Public Function Prototypes
 void Actuator_InitPorts(void);

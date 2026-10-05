@@ -66,8 +66,12 @@ static void act_off(void)
 
 static void act_reset(void)
 {
+    // De-energize both valve coils so they never overlap, then hold down long
+    // enough to guarantee full retraction regardless of where the sequence left it.
+    act_off();
+    vTaskDelay(pdMS_TO_TICKS(MS_REVERSE_PAUSE));
     act_down();
-    vTaskDelay(pdMS_TO_TICKS(MS_PER_SECOND));
+    vTaskDelay(pdMS_TO_TICKS(MS_RESET_DOWN));
     act_off();
 }
 
@@ -89,6 +93,7 @@ static void act_violent(void)
         act_up();
         vTaskDelay(pdMS_TO_TICKS(timeMod));
     }
+    act_down();
     act_reset();
 }
 
