@@ -9,7 +9,7 @@
 #define PIN_ACT_DOWN PORT_PA21
 
 // Timing Constants
-#define MS_MIN_START  (MS_PER_SECOND * 25UL)
+#define MS_MIN_START  (MS_PER_SECOND * 35UL)  // gap after a sequence ENDS, not after it starts
 #define MS_MAX_START  (MS_PER_SECOND * 60UL)
 #define MS_SLAM_LONG  500UL
 #define MS_SLAM_SHORT 250UL
