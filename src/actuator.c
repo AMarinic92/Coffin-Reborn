@@ -114,17 +114,11 @@ static void act_quick_up(void)
     act_reset();
 }
 
+// Map a raw 32-bit TRNG word evenly onto [min, max]. The modulo bias is
+// negligible for spans this small against 2^32.
 static uint32_t interpolateNum(uint32_t min, uint32_t max, uint32_t number)
 {
-    uint32_t out = number;
-    if (out > max) {
-        while (out > max) out = out >> 1;
-        if (out < min) out = min;
-    } else if (out < min) {
-        while (out < min) out = out << 1;
-        if (out > max) out = max;
-    }
-    return out;
+    return min + (number % (max - min + 1UL));
 }
 
 // ---------------------------------------------------------

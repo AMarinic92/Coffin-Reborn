@@ -7,15 +7,17 @@
 
 #include "timing.h"
 
-// Default cycle: fog on for FOG_ON_MS out of every FOG_PERIOD_MS.
-#define FOG_ON_MS      (20UL * MS_PER_SECOND)
+// Default cycle: fog on for FOG_ON_MS out of every FOG_PERIOD_MS. The period is
+// counted from the last burst, so an actuator-triggered burst restarts it.
+#define FOG_ON_MS      (17UL * MS_PER_SECOND)
 #define FOG_PERIOD_MS  (45UL * MS_PER_SECOND)
 
 void Fog_InitPorts(void);
 void Fog_Task(void *pvParameters);
 
-// Turn the fog on now, or push back the off time of a burst already running.
-// Safe to call from any task. Never shortens a burst.
+// Turn the fog on now, or push back the off time of a burst already running,
+// and push the next automatic burst a full FOG_PERIOD_MS out.
+// Safe to call from any task (not from an ISR). Never shortens a burst.
 void Fog_Trigger(void);
 
 #endif /* FOG_H */

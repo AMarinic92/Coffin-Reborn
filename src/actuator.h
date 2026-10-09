@@ -9,8 +9,11 @@
 #define PIN_ACT_DOWN PORT_PA21
 
 // Timing Constants
-#define MS_MIN_START  (MS_PER_SECOND * 35UL)  // gap after a sequence ENDS, not after it starts
-#define MS_MAX_START  (MS_PER_SECOND * 60UL)
+// Gap after a sequence ENDS, not after it starts. The minimum is past one fog
+// period (FOG_PERIOD_MS), so the automatic burst has started filling the coffin
+// and the machine has had time to recover before the next event.
+#define MS_MIN_START  (MS_PER_SECOND * 50UL)
+#define MS_MAX_START  (MS_PER_SECOND * 75UL)
 #define MS_SLAM_LONG  500UL
 #define MS_SLAM_SHORT 250UL
 #define MAX_DROP_MS   (MS_PER_SECOND * 15UL)
