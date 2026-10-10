@@ -10,8 +10,10 @@
 static volatile bool is_up = false;
 static volatile bool is_down = false;
 static volatile bool actuator_active = false;  // true while a sequence runs
+static volatile bool violent_active = false;   // true while act_violent runs
 
 bool Actuator_IsActive(void) { return actuator_active; }
+bool Actuator_IsViolent(void) { return violent_active; }
 
 // Internal Helpers
 static uint32_t interpolateNum(uint32_t min, uint32_t max, uint32_t number);
@@ -147,8 +149,10 @@ void Actuator_Task(void *pvParameters)
 
 
         // 2. Execute sequence (These functions block internally via vTaskDelay)
-        //    Flag the LED task to switch from Fire -> GreenPurple while we move.
+        //    Flag the LED task to switch from Fire -> GreenPurple while we move,
+        //    or to the red/white strobe for the violent sequence.
         actuator_active = true;
+        violent_active = (act_index == 2);
         Fog_Trigger();   // fog covers the sequence; extends a burst already running
         switch(act_index) {
             case 0: act_random_drop(); break;
@@ -156,6 +160,7 @@ void Actuator_Task(void *pvParameters)
             case 2: act_violent();     break;
             default: act_reset();      break;
         }
+        violent_active = false;
         actuator_active = false;
 
         // 3. Calculate next event time using the hardware TRNG

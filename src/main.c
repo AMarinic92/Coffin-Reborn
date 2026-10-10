@@ -62,9 +62,12 @@ void NeoPixel_Task(void *pvParameters)
 
     while(1)
     {
-        // Fire while idle, GreenPurple while the actuator is moving
+        // Fire while idle, GreenPurple while the actuator is moving, and a
+        // red/white strobe (one flash every 4th frame) for the violent sequence
 #if USE_WS2812_LIB
-        if (Actuator_IsActive())
+        if (Actuator_IsViolent())
+            ws2812_fx_strobe_red_white(&strip, frame++, 4, 80);
+        else if (Actuator_IsActive())
             ws2812_fx_green_purple(&strip, frame++, 80);
         else
             ws2812_fx_fire(&strip, frame++, 80);

@@ -26,5 +26,6 @@
 void Actuator_InitPorts(void);
 void Actuator_Task(void *pvParameters);
 bool Actuator_IsActive(void);   // true while a sequence is running (drives LED effect)
+bool Actuator_IsViolent(void);  // true while the violent sequence is running (strobe)
 
 #endif /* ACTUATOR_H */
